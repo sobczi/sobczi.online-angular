@@ -1,0 +1,143 @@
+<div
+  fxLayout="row"
+  fxLayoutAlign="center center"
+  fxFlexFill>
+  <mat-card
+    class="small-form"
+    fxLayout="column"
+    fxLayoutGap="10px"
+    fxFlex.gt-xs="50"
+    fxFlex.lt-sm="100">
+    <div
+      class="header font-medium"
+      fxLayout="row"
+      fxLayoutAlign="center center"
+      fxLayoutGap="5px">
+      <mat-icon svgIcon="edit"></mat-icon>
+      <span>{{ 'settingsComponent.basicData' | translate }}</span>
+    </div>
+    <form
+      [formGroup]="basicForm"
+      fxLayout="column"
+      fxLayoutGap="10px">
+      <mat-form-field>
+        <mat-label>{{ 'shared.fullName' | translate }}</mat-label>
+        <input matInput formControlName="fullName">
+        <mat-error>{{ 'shared.fieldRequired' | translate }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ 'shared.email' | translate }}</mat-label>
+        <input matInput formControlName="email">
+        <mat-error>{{ 'shared.fieldRequired' | translate }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ 'shared.privilages' | translate }}</mat-label>
+        <input matInput formControlName="role">
+      </mat-form-field>
+      <div
+        fxLayout="row"
+        fxLayoutAlign="center center"
+        fxFlex>
+        <button
+          mat-raised-button
+          color="primary"
+          class="submit-button"
+          (click)="handleBasicChange()"
+          [disabled]="basicForm.invalid || !basicForm.touched">
+          {{ 'settingsComponent.updateData' | translate }}
+        </button>
+      </div>
+    </form>
+    <div fxLayout="row" fxFlex>
+      <mat-divider fxFlex></mat-divider>
+    </div>
+    <div
+      class="section-padding header font-medium"
+      fxLayout="row"
+      fxLayoutAlign="center center"
+      fxLayoutGap="5px">
+      <mat-icon svgIcon="lock"></mat-icon>
+      <span>{{ 'shared.password' | translate | uppercase }}</span>
+    </div>
+    <form
+      [formGroup]="passwordForm"
+      fxLayout="column"
+      fxLayoutGap="10px">
+      <mat-form-field>
+        <mat-label>
+          {{ 'shared.password' | translate }}
+        </mat-label>
+        <input
+          matInput
+          formControlName="password"
+          [type]="passwordIsVisible ? 'text' : 'password'"
+          [errorStateMatcher]="errorStateMatcher">
+        <mat-icon
+          matSuffix
+          class="pointer"
+          [svgIcon]="passwordIsVisible ? 'visibility_on' : 'visibility_off'"
+          (click)="passwordIsVisible = !passwordIsVisible"
+        ></mat-icon>
+        <mat-error *ngIf="passwordForm.controls.password.hasError('required')">
+          {{ 'shared.fieldRequired' | translate }}
+        </mat-error>
+        <mat-error
+          *ngIf="passwordForm.hasError('passwordsNotEqual')">
+          {{ 'shared.passwordsNotEqual' | translate }}</mat-error>
+        <mat-error
+          *ngIf="passwordForm.controls.password.hasError('pattern')">
+          {{ 'shared.passwordPattern' | translate}}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>
+          {{ 'shared.repeatPassword' | translate }}
+        </mat-label>
+        <input
+          matInput
+          formControlName="repeatPassword"
+          [type]="passwordIsVisible ? 'text' : 'password'"
+          [errorStateMatcher]="errorStateMatcher">
+        <mat-icon
+          matSuffix
+          class="pointer"
+          [svgIcon]="passwordIsVisible ? 'visibility_on' : 'visibility_off'"
+          (click)="passwordIsVisible = !passwordIsVisible"
+        ></mat-icon>
+        <mat-error
+          *ngIf="passwordForm.controls.repeatPassword.hasError('required')">
+          {{ 'shared.fieldRequired' | translate }}</mat-error>
+        <mat-error
+          *ngIf="passwordForm.hasError('passwordsNotEqual')">
+          {{ 'shared.passwordsNotEqual' | translate }}</mat-error>
+      </mat-form-field>
+      <div
+        fxLayout="row"
+        fxLayoutAlign="center center"
+        fxFlex>
+        <button
+          mat-raised-button
+          color="primary"
+          class="submit-button"
+          (click)="handlePasswordChange()"
+          [disabled]="passwordForm.invalid">
+          {{ 'settingsComponent.updatePassword' | translate }}</button>
+      </div>
+    </form>
+    <div fxLayout="row" fxFlex>
+      <mat-divider fxFlex></mat-divider>
+    </div>
+    <div
+      class="section-padding"
+      fxLayout="row"
+      fxLayoutAlign="center center"
+      fxFlex>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="handleAccountDeletion()">
+        <mat-icon svgIcon="delete"></mat-icon>
+        {{ 'settingsComponent.deleteAccount' | translate }}
+      </button>
+    </div>
+  </mat-card>
+</div>

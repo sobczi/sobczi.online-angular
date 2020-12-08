@@ -1,0 +1,22 @@
+<div fxLayout="column" fxLayoutGap="25px">
+  <div fxLayout="row" fxLayoutGap="5px">
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <mat-icon class="pointer" [svgIcon]="expandStatus(sections[0])" (click)="handleExpandISPLMR()"></mat-icon>
+    </div>
+    <div fxLayout="column">
+      <div fxLayout="row" fxLayoutGap="5px">
+        <span class="position">Full Stack Developer {{ 'cv.at' | translate }} ISPLMR</span>
+        <span class="date-ranges">{{ ISPLMRDuration }}</span>
+      </div>
+      <span class="date-ranges">03/2020 - {{ 'cv.now' | translate }}</span>
+    </div>
+  </div>
+  <div *ngIf="currentExpanded === sections[0]" class="description" fxLayout="row" fxFlex.gt-md="50" [@fadeInOut]>
+    <div fxFlex.gt-md="50">
+      {{ 'cv.ISPLMR.firstPart' | translate }}
+      <span class="pointer link" (click)="handleEuroMedisClick()">EuroMedis</span>{{ 'cv.ISPLMR.secondPart' | translate }}
+      <span class="pointer link" (click)="handleEclinicClick()">{{ 'cv.ISPLMR.thirdPart' | translate }}</span>
+      {{ 'cv.ISPLMR.fourthPart' | translate }}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<div fxLayout="column" fxLayoutGap="25px" fxFlex>
+  <div fxLayout="column">
+    <div class="section" fxLayout="row" fxLayoutGap="5px">
+      <mat-icon [svgIcon]="section.svgIcon" color="primary"></mat-icon>
+      <span class="pt4 primaryColorBG">{{ section.name | translate }}</span>
+    </div>
+    <div fxLayout="row" fxFlex.gt-md="50">
+      <mat-divider fxFlex.lt-lg="100" fxFlex.gt-md="50"></mat-divider>
+    </div>
+  </div>
+</div>

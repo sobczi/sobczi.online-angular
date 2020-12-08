@@ -1,0 +1,30 @@
+$mm: 'montserrat-medium';
+$mb: 'montserrat-bold';
+
+.element {
+  a,
+  span {
+    font-family: $mm;
+    color: white;
+    padding-top: 3px;
+    text-decoration: none;
+  }
+
+  mat-icon {
+    color: white;
+  }
+}
+
+.element:hover {
+  cursor: pointer;
+  a,
+  span {
+    font-family: $mb;
+    font-size: 11pt;
+  }
+
+  mat-icon,
+  img {
+    transform: rotate(5deg);
+  }
+}

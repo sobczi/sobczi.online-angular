@@ -1,0 +1,26 @@
+::ng-deep .menu {
+  padding-top: 12px;
+  background: unset;
+  box-shadow: unset;
+}
+
+button {
+  border-radius: 25px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+}
+
+.toolbar {
+  margin-bottom: 25px;
+}
+
+.active {
+  color: rgba(0, 0, 0, 0.75);
+  background: white;
+}
+
+.floating {
+  position: fixed;
+  left: 15px;
+  bottom: 15px;
+}

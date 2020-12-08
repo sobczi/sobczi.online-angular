@@ -1,0 +1,117 @@
+<div
+  class="container"
+  fxLayout="column"
+  fxLayoutGap="15px">
+  <div
+    class="header"
+    fxLayout="row"
+    fxLayoutAlign="center center"
+    fxLayoutGap="5px">
+    <mat-icon svgIcon="management"></mat-icon>
+    <span>{{ 'manageComponent.header' | translate }}</span>
+  </div>
+  <div fxLayout="column">
+    <div
+      class="table-header"
+      fxLayout.gt-sm="row"
+      fxLayout.lt-md="column"
+      fxLayoutGap="15px"
+      fxFlex>
+      <div
+        fxLayout.gt-sm="column"
+        fxLayout.lt-md="row"
+        fxLayoutAlign="center center"
+        fxFlex>{{ 'manageComponent.created' | translate }}</div>
+      <div
+        fxLayout.gt-sm="column"
+        fxLayout.lt-md="row"
+        fxLayoutAlign="center center"
+        fxFlex>{{ 'manageComponent.lastLogged' | translate }}</div>
+      <div
+        fxLayout.gt-sm="column"
+        fxLayout.lt-md="row"
+        fxLayoutAlign="center center"
+        fxFlex>{{ 'shared.fullName' | translate }}</div>
+      <div
+        fxLayout.gt-sm="column"
+        fxLayout.lt-md="row"
+        fxLayoutAlign="center center"
+        fxFlex>{{ 'shared.email' | translate }}</div>
+      <div
+        fxLayout.gt-sm="column"
+        fxLayout.lt-md="row"
+        fxLayoutAlign="center center"
+        fxFlex>{{ 'manageComponent.accountActive' | translate }}</div>
+      <div
+        fxLayout.gt-sm="column"
+        fxLayout.lt-md="row"
+        fxLayoutAlign="center center"
+        fxFlex>{{ 'shared.privilages' | translate }}</div>
+      <div
+        fxLayout.gt-sm="column"
+        fxLayout.lt-md="row"
+        fxLayoutAlign="center center"
+        fxFlex>{{ 'shared.delete' | translate }}</div>
+    </div>
+    <div fxLayout="column">
+      <div
+        *ngFor="let user of users; let idx = index"
+        class="table-row"
+        fxLayout.gt-sm="row"
+        fxLayout.lt-md="column"
+        fxLayoutGap="15px"
+        fxFlex>
+        <div
+          fxLayout.gt-sm="column"
+          fxLayout.lt-md="row"
+          fxLayoutAlign="center center"
+          fxFlex>{{ user.inserted | date: 'dd-MM-yyyy HH:mm' }}</div>
+        <div
+          fxLayout.gt-sm="column"
+          fxLayout.lt-md="row"
+          fxLayoutAlign="center center"
+          fxFlex>{{ user.lastLogged | date: 'dd-MM-yyyy HH:mm' }}</div>
+        <div
+          fxLayout.gt-sm="column"
+          fxLayout.lt-md="row"
+          fxLayoutAlign="center center"
+          fxFlex>{{ user.fullName }}</div>
+        <div
+          fxLayout.gt-sm="column"
+          fxLayout.lt-md="row"
+          fxLayoutAlign="center center"
+          fxFlex>{{ user.email }}</div>
+        <div
+          fxLayout.gt-sm="column"
+          fxLayout.lt-md="row"
+          fxLayoutAlign="center center"
+          fxFlex>
+          <mat-slide-toggle
+            color="primary"
+            [checked]="user.active"
+            (change)="handleActiveChange(user);"
+          ></mat-slide-toggle>
+        </div>
+        <div
+          fxLayout="column"
+          fxLayoutAlign="center center"
+          fxFlex>
+          <mat-select
+            [value]="user.role"
+            (valueChange)="handleRoleChange(user, $event)">
+            <mat-option
+              *ngFor="let privilage of privilages"
+              [value]="privilage">{{ 'shared.' + privilage | translate }}</mat-option>
+          </mat-select>
+        </div>
+        <div
+          fxLayout="column"
+          fxLayoutAlign="center center"
+          fxFlex>
+          <mat-icon svgIcon="delete"
+            [matTooltip]="'shared.delete' | translate"
+            (click)="handleDelete(user)"></mat-icon>
+        </div>
+    </div>
+  </div>
+</div>

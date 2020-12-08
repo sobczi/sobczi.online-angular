@@ -1,0 +1,183 @@
+{
+  "shared": {
+    "delete": "Usuń",
+    "invalidEmail": "Seems like provided email is incorrect.",
+    "loggedOut": "Logged out",
+    "bye": "Bye",
+    "login": "Login",
+    "fieldRequired": "This field is required.",
+    "username": "Username",
+    "homepage": "Homepage",
+    "sendRequest": "Send request",
+    "email": "Email",
+    "fullName": "Full name",
+    "password": "Password",
+    "repeatPassword": "Repeat password",
+    "passwordsNotEqual": "Passwords are different.",
+    "emailOccupied": "Email address is already occupied.",
+    "passwordPattern": "Password should consist of at least 8 characters including at least one number.",
+    "backToLogin": "Back to login",
+    "privilages": "Privilages",
+    "User": "User",
+    "Admin": "Admin",
+    "DemoUser": "Demo user",
+    "registration": "Registration"
+  },
+  "cv": {
+    "at": "at",
+    "now": "now",
+    "WIZUT": "Software engineer, West Pomeranian University of Technology in Szczecin",
+    "experience": "EXPERIENCE",
+    "education": "EDUCATION",
+    "skills": "SKILLS",
+    "langauges": "LANGUAGES",
+    "polish": "Polish",
+    "english": "Angielski",
+    "german": "German",
+    "native": "Native",
+    "advancedFluent": "Advanced ~ Fluent",
+    "advanced": "Advanced",
+    "ISPLMR": {
+      "firstPart": "In cooperation with",
+      "secondPart": ", developing web apps in MEAN stack for medical centrum to handle online and offline patients. Managing and creating electronic medical documentation, reservations, schedules, payments. Three applications for patients, doctors and managing. Integrations with external systems via REST API and SOAP. Backend based on microservices writed with Node using TypeScript. Frontend with Angular with abstraction of frequently used elements into libraries. Work of our team is available on a",
+      "thirdPart": "generally available site",
+      "fourthPart": "for patients on which I was responsible for about 75% frontend work. Working remotely in a small team."
+    },
+    "contact": "Contact"
+  },
+  "headerComponent": {
+    "historyOfInvoices": "History of invoices",
+    "createInvoice": "Add invoice",
+    "logout": "Logout",
+    "settings": "Settings",
+    "management": "Management"
+  },
+  "loginComponent": {
+    "login": "LOGIN",
+    "loggedIn": "Logged in!",
+    "welcome": "Welcome",
+    "errorLogin": {
+      "header": "Error during login",
+      "content": "Make sure that you typed proper username and password."
+    },
+    "forgotPassword": "Forgot your password?"
+  },
+  "registerComponent": {
+    "registrationFailed": "Registration failed",
+    "registrationSuccess": "Registration request was sent",
+    "registrationInfo": "If request will be accepted you will get on provided email disposable password."
+  },
+  "historyComponent": {
+    "header": "HISTORY OF INVOICES",
+    "searchInvoice": "Search invoices",
+    "dateFrom": "Date from",
+    "dateTo": "Date to",
+    "clearFilters": "Clear filters",
+    "issued": "Issued",
+    "name": "Name",
+    "gross": "Gross",
+    "client": "Client",
+    "edit": "Edit",
+    "download": "Download",
+    "notFound": "Invoices not found.",
+    "downloadMultipleElements": "Download multiple elements"
+  },
+  "invoiceComponent": {
+    "transfer": "Transfer",
+    "addPosition": "Add item",
+    "orderNumber": "Invoice number/name",
+    "sale": "Sale",
+    "saveChanges": "Save changes",
+    "issue": "Issue an invoice",
+    "taxId": "Tax ID",
+    "taxIdFormat": "Tax ID should consists of 10 digits.",
+    "address": "Street, house number and apartment",
+    "netValue": "The net value",
+    "itemOrService": "Item or service",
+    "postalCode": "Postal code",
+    "city": "City",
+    "postalCodeFormat": "Postal code should consist of 5 digits.",
+    "gtuCode": "GTU Code",
+    "requiredVat": "This field is required for goods subject to VAT.",
+    "inproperValue": "Invalid value entered.",
+    "unit": "Unit",
+    "vatRate": "VAT rate",
+    "amount": "Amount",
+    "vatValue": "VAT value",
+    "grossValue": "Gross value",
+    "deletePosition": "Delete item",
+    "paymentAndSign": "Payment and sign",
+    "accountNumber": "Account number",
+    "accountNumber26Digits": "Account number should consist of 26 digits.",
+    "paymentType": "Payment type",
+    "authorizedPersonSign": "Signature of the person auhtorized to issue",
+    "signCheckedButEmpty": "Signature was checked but not filled.",
+    "saveAsNew": "Save as new",
+    "document": "Document",
+    "documentType": "Document type",
+    "dateOfIssue": "Date of issue",
+    "seller": "Seller",
+    "buyer": "Buyer",
+    "addInvoice": "CREATE INVOICE",
+    "editInvoice": "EDIT INVOICE",
+    "newMockup": "Too much? Fill forms with example data",
+    "exampleDisclaimer": "Does not matter how you will fill those forms - in result example .pdf will be generated with example data.",
+    "vatInvoice": "VAT invoice",
+    "salesInvoice": "Sales invoice",
+    "piecesUnit": "pcs",
+    "monthsUnit": "mo",
+    "vatExempt": "E"
+  },
+  "manageComponent": {
+    "header": "MANAGEMENT",
+    "accountActive": "Account active",
+    "deleteUser": {
+      "header": "User deletion",
+      "content": "Are you sure that you want to delete user and all his data from the system?"
+    },
+    "created": "Created",
+    "lastLogged": "Last logged"
+  },
+  "resetComponent": {
+    "resetPassword": "Password change",
+    "changePassword": "Change password",
+    "cannotChange": "Cannot change password",
+    "inproperURL": "Seems like password reset key has expired."
+  },
+  "forgotComponent": {
+    "passwordRecover": "Password recovery",
+    "resetPassword": "Reset password",
+    "ifExistsWasSent": "If account exists, email with link to password recovery was sent to related email."
+  },
+  "settingsComponent": {
+    "deleteAccount": "DELETE ACCOUNT",
+    "updateData": "Update data",
+    "updatePassword": "Update password",
+    "basicData": "BASIC DATA",
+    "role": "Permissions",
+    "updateDataFailed": "Basic data update failed",
+    "dataUpdateSuccessfuly": {
+      "header": "Basic data update successful",
+      "content": "Your data was successfuly updated."
+    },
+    "passwordUpdateSuccessfuly": {
+      "header": "Password update successful",
+      "content": "Your password was updated."
+    },
+    "accountDeletion": {
+      "header": "Account deletion",
+      "content": "Are you sure that you want to delete your account and your whole data?"
+    }
+  },
+  "sessionComponent": {
+    "sessionEnds": "Session ends",
+    "wantToRefresh": "Do you want to refresh it?"
+  },
+  "confirmDialogComponent": {
+    "yes": "Yes",
+    "no": "No"
+  },
+  "simpleDialogComponent": {
+    "close": "Close"
+  }
+}

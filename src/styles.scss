@@ -1,0 +1,83 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$primary: mat-palette($mat-orange, 800);
+$accent: mat-palette($mat-orange, 500);
+$warn: mat-palette($mat-orange, 300);
+$theme: mat-light-theme($primary, $accent, $warn);
+@include angular-material-theme($theme);
+
+$mm: 'montserrat-medium';
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+mat-label {
+  font-family: $mm;
+}
+
+mat-error {
+  font-family: $mm;
+}
+
+input {
+  font-family: $mm;
+}
+
+fieldset {
+  font-family: $mm;
+  border-radius: 5px;
+}
+
+button {
+  font-family: $mm !important;
+}
+
+mat-select {
+  font-family: $mm !important;
+}
+
+.pointer:hover {
+  cursor: pointer;
+}
+
+.small-form {
+  margin: 1.5% 5%;
+  max-width: 500px !important;
+  border-radius: 0px !important;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 5px !important;
+  background-color: rgba(0, 0, 0, 0.025);
+}
+
+.container {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background-color: rgba(0, 0, 0, 0.025);
+}
+
+.submit-button {
+  border-radius: 0px !important;
+  min-width: 150px !important;
+  border-radius: 5px !important;
+}
+
+.header {
+  font-size: 14pt;
+}
+
+.snippet {
+  font-family: 'montserrat-medium';
+  text-decoration: underline;
+  font-size: 8pt;
+}
+
+.snippet:hover {
+  cursor: pointer;
+}

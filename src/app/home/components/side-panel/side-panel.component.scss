@@ -1,0 +1,41 @@
+@import '~@angular/material/theming';
+@import 'styles.scss';
+
+$mm: 'montserrat-medium';
+$mb: 'montserrat-bold';
+
+$acc: mat-color($accent);
+
+.container {
+  padding: 25px;
+  background-color: #24292e;
+  min-width: 275px;
+}
+
+.photo {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.name {
+  font-family: $mb;
+  font-size: 20pt;
+  color: $acc;
+}
+
+.contact-header {
+  font-family: $mb;
+  font-size: 16pt;
+  color: $acc;
+}
+
+.position {
+  font-family: $mm;
+  font-size: 10pt;
+  color: white;
+}
+
+.divider {
+  background-color: white;
+  margin-right: -25px;
+}

@@ -1,0 +1,52 @@
+$primaryColor: #ef6c00;
+$padding: 25px;
+$borderColor: rgba(0, 0, 0, 0.15);
+
+.status {
+  line-height: 48pt;
+  font-size: 48pt;
+  font-family: 'montserrat-bold';
+
+  div {
+    width: 100px;
+  }
+}
+
+.container {
+  padding: 0px $padding $padding $padding;
+}
+
+.submit-button {
+  width: 160px;
+}
+
+.status-divider {
+  color: $primaryColor;
+}
+
+.card-switchers {
+  button {
+    box-shadow: unset;
+    border-bottom: 1px solid $borderColor;
+    background-color: rgba(0, 0, 0, 0.025);
+  }
+}
+
+.section-active {
+  color: $primaryColor;
+}
+
+.timer-btn {
+  margin-left: -$padding;
+  border-bottom-left-radius: unset;
+  border-bottom-right-radius: unset;
+  border-top-right-radius: unset;
+  border-right: 1px solid $borderColor;
+}
+
+.history-btn {
+  margin-right: -$padding;
+  border-bottom-left-radius: unset;
+  border-bottom-right-radius: unset;
+  border-top-left-radius: unset;
+}

@@ -1,0 +1,71 @@
+$fcolor: rgba(0, 0, 0, 0.1);
+$scrollWidth: 17px;
+$borderWidth: 1px;
+$rowHeight: 40px;
+$fontMM: 'montserrat-medium';
+$iconsWidth: 60px;
+$rows-paddings: $scrollWidth $scrollWidth $scrollWidth 0px;
+
+.container {
+  margin: 1.5% 5%;
+  border-radius: 5px;
+  min-height: 800px;
+}
+
+.header {
+  font-family: $fontMM;
+  font-size: 14pt;
+  padding-top: 15px;
+}
+
+.not-found {
+  font-family: $fontMM;
+  font-size: 12pt;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.table-header {
+  font-family: $fontMM;
+  font-size: 11pt;
+  background-color: rgba(0, 0, 0, 0.05);
+  min-height: $rowHeight;
+  border: $borderWidth solid $fcolor;
+  padding: $rows-paddings;
+}
+
+.table {
+  overflow-x: auto;
+}
+
+.table-row {
+  padding: $rows-paddings;
+  border-bottom: $borderWidth solid $fcolor;
+}
+
+.table-row:hover {
+  background-color: $fcolor;
+}
+
+.icons-row {
+  > div {
+    width: $iconsWidth;
+  }
+
+  > div > mat-icon:hover {
+    cursor: pointer;
+    transform: scale(1.25);
+  }
+}
+
+.icons-element {
+  width: $iconsWidth;
+}
+
+.search-section {
+  padding: 16px;
+}
+
+.download-pdfs:hover {
+  transform: scale(1.25);
+  cursor: pointer;
+}

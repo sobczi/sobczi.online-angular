@@ -1,0 +1,42 @@
+<div fxLayout="row" fxLayoutAlign="center center" fxFlexFill>
+  <div
+    class="container small-form"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    fxLayoutGap="15px"
+    fxFlex>
+      <div class="card-switchers" fxLayout="row" fxFlexFill>
+        <button
+          mat-raised-button
+          class="timer-btn"
+          [class.section-active]="currentActive === 'TIMER'"
+          fxFlex>
+          <mat-icon svgIcon="clock"></mat-icon>
+        </button>
+        <button mat-raised-button class="history-btn" fxFlex>
+          <mat-icon svgIcon="history"></mat-icon>
+        </button>
+      </div>
+      <div class="status" fxLayout="row" fxLayoutGap="15px">
+        <div fxLayoutAlign="center center">{{ minutes }}</div>
+        <span class="status-divider">:</span>
+        <div fxLayoutAlign="center center">{{ seconds }}</div>
+      </div>
+      <mat-progress-bar mode="determinate" [value]="percentage"></mat-progress-bar>
+      <div fxLayout="column" fxLayoutGap="15px">
+        <button
+          mat-raised-button
+          class="submit-button"
+          color="primary"
+          (click)="handleSubmit()">
+          <mat-icon [svgIcon]="!currentlyRunning ? 'play' : 'pause'"></mat-icon>
+        </button>
+        <button
+          mat-raised-button
+          (click)="handleReset()"
+          [disabled]="currentlyRunning || currentTime === PERIOD">
+          <mat-icon svgIcon="clear"></mat-icon>
+        </button>
+      </div>
+  </div>
+</div>

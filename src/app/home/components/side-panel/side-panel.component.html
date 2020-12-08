@@ -1,0 +1,18 @@
+<div class="container" fxLayout="column" fxLayoutGap="25px" fxFlex>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <img class="photo" src="assets/images/photo.jpg">
+  </div>
+  <div fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="center center">
+    <div fxLayout="column" fxLayoutAlign="center start">
+      <span class="name">{{ fullName }}</span>
+      <span class="position">{{ currentPosition }}</span>
+    </div>
+  </div>
+  <div fxLayout="column" fxLayoutGap="10px">
+    <div fxLayout="column">
+      <span class="contact-header">{{ 'cv.contact' | translate }}</span>
+      <mat-divider class="divider" fxFlex></mat-divider>
+    </div>
+    <app-contact-elements [elements]="contactElements"></app-contact-elements>
+  </div>
+</div>

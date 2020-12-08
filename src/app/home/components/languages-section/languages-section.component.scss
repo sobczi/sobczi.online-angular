@@ -1,0 +1,13 @@
+$mm: 'montserrat-medium';
+
+.language-name {
+  font-family: $mm;
+  font-size: 11pt;
+}
+
+.language-level {
+  font-family: $mm;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 10pt;
+  font-style: italic;
+}

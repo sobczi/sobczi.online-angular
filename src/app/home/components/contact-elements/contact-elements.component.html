@@ -1,0 +1,10 @@
+<div fxLayout="column" fxLayoutGap="10px">
+  <div *ngFor="let element of elements" fxLayout="row">
+    <div class="element" fxLayout="row" fxLayoutGap="5px" (click)="handleElementClick(element)">
+      <mat-icon *ngIf="element.icon" [svgIcon]="element.icon"></mat-icon>
+      <img *ngIf="element.image" [src]="'assets/images/' + element.image">
+      <a *ngIf="element.href" [href]="element.href">{{ element.name }}</a>
+      <span *ngIf="!element.href">{{ element.name }}</span>
+    </div>
+  </div>
+</div>

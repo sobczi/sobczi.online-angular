@@ -1,0 +1,123 @@
+<div class="container" fxLayout="column" fxLayoutGap="15px">
+  <div class="header" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px" fxFlex>
+    <mat-icon svgIcon="file"></mat-icon>
+    <span *ngIf="!editView; else editViewHeader">{{ 'invoiceComponent.addInvoice' | translate }}</span>
+    <ng-template #editViewHeader>
+      <span>{{ 'invoiceComponent.editInvoice' | translate }}</span>
+    </ng-template>
+  </div>
+  <div *ngIf="isDemoUserAndNewMode" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px" fxFlex>
+    <button mat-raised-button class="submit-button" (click)="handleFillWithMockup()">{{ 'invoiceComponent.newMockup' | translate }}</button>
+    <span class="does-not-matter">{{ 'invoiceComponent.exampleDisclaimer' | translate }}</span>
+  </div>
+  <form [formGroup]="base">
+    <fieldset>
+      <legend>{{ 'invoiceComponent.document' | translate }}</legend>
+      <div fxLayout.gt-xs="row" fxLayout.lt-sm="column" fxLayoutGap.gt-xs="15px">
+        <mat-form-field fxFlex>
+          <mat-label>{{ 'invoiceComponent.documentType' | translate }}</mat-label>
+          <mat-select formControlName="type">
+            <mat-option *ngFor="let invoiceType of invoiceTypes" [value]="invoiceType.value">
+              {{ invoiceType.translation | translate }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="base.controls.type.hasError('required')">{{ 'shared.fieldRequired' | translate }}</mat-error>
+        </mat-form-field>
+        <mat-form-field fxFlex>
+          <mat-label>{{ 'invoiceComponent.dateOfIssue' | translate }}</mat-label>
+          <input [matDatepicker]="pickerDate" matInput formControlName="date">
+          <mat-error *ngIf="base.controls.date.hasError('required')">{{ 'shared.fieldRequired' | translate }}</mat-error>
+          <mat-datepicker-toggle matSuffix [for]="pickerDate"></mat-datepicker-toggle>
+          <mat-datepicker #pickerDate></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div fxLayout.gt-xs="row" fxLayout.lt-sm="column" fxLayoutGap.gt-xs="15px">
+        <mat-form-field fxFlex>
+          <mat-label>{{ 'invoiceComponent.orderNumber' | translate }}</mat-label>
+          <input matInput formControlName="number">
+          <mat-error *ngIf="base.controls.number.hasError('required')">{{ 'shared.fieldRequired' | translate }}</mat-error>
+        </mat-form-field>
+        <div fxFlex></div>
+      </div>
+    </fieldset>
+  </form>
+  <div fxLayout.gt-md="row" fxLayout.lt-lg="column" fxLayoutGap="15px" fxFlex>
+    <fieldset fxLayout="column" fxFlex>
+      <legend>{{ 'invoiceComponent.seller' | translate }}</legend>
+      <app-subject-form [isSeller]="true" [subject]="seller" #subject></app-subject-form>
+    </fieldset>
+    <fieldset fxLayout="column" fxFlex>
+      <legend>{{ 'invoiceComponent.buyer' | translate }}</legend>
+      <app-subject-form [isSeller]="false" [subject]="buyer" #subject></app-subject-form>
+    </fieldset>
+  </div>
+  <fieldset fxLayout="row">
+    <legend>{{ 'invoiceComponent.sale' | translate }}</legend>
+    <div fxLayout="column" fxLayoutGap="15px" fxFlex>
+      <ng-container *ngFor="let item of items; let idx = index">
+        <app-invoice-item-form [item]="item" #itemComponent></app-invoice-item-form>
+        <div fxLayout="row" fxLayoutAlign="center center" fxFlex>
+          <button mat-raised-button class="submit-button" (click)="handleItemFormDelete(item)">{{ 'invoiceComponent.deletePosition' | translate }}</button>
+        </div>
+        <div *ngIf="idx !== items.length - 1" class="divider" fxFlex></div>
+      </ng-container>
+      <mat-divider [class.elements-not-found-err]="elementsNotFoundError"></mat-divider>
+      <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px" fxFlex>
+        <div fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="center center">
+          <span>{{ 'invoiceComponent.netValue' | translate }}</span>
+          <span class="value">{{ totalValue('netto') }}</span>
+        </div>
+        <div fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="center center">
+          <span>{{ 'invoiceComponent.vatValue' | translate }}</span>
+          <span class="value">{{ totalValue('vat') }}</span>
+        </div>
+        <div fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="center center">
+          <span>{{ 'invoiceComponent.grossValue' | translate }}</span>
+          <span class="value">{{ totalValue('brutto') }}</span>
+        </div>
+      </div>
+      <mat-divider [class.elements-not-found-err]="elementsNotFoundError"></mat-divider>
+      <div fxLayout="row" fxLayoutAlign="center center" fxFlex>
+        <button mat-raised-button class="submit-button" color="primary" (click)="handleItemFormAdd()">{{ 'invoiceComponent.addPosition' | translate }}</button>
+      </div>
+    </div>
+  </fieldset>
+  <form [formGroup]="payment" fxFlex>
+    <fieldset fxLayout="column">
+      <legend>{{ 'invoiceComponent.paymentAndSign' | translate }}</legend>
+      <div fxLayout.gt-xs="row" fxLayout.lt-sm="column" fxLayoutGap.gt-xs="15px" fxFlex>
+        <mat-form-field fxFlex>
+          <mat-label>{{ 'invoiceComponent.accountNumber' | translate }}</mat-label>
+          <input matInput formControlName="accountNumber" (keyup)="handleAccountNumberChanges()">
+          <mat-error *ngIf="payment.controls.accountNumber.hasError('required')">{{ 'shared.fieldRequired' | translate }}</mat-error>
+          <mat-error *ngIf="payment.controls.accountNumber.hasError('pattern')">{{ 'invoiceComponent.accountNumber26Digits' | translate }}</mat-error>
+        </mat-form-field>
+        <mat-form-field fxFlex>
+          <mat-label>{{ 'invoiceComponent.paymentType' | translate }}</mat-label>
+          <mat-select formControlName="type">
+            <mat-option *ngFor="let type of paymentTypes" [value]="type.value">{{ type.translation | translate }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxLayout.gt-xs="row" fxLayout.lt-sm="column" fxLayoutGap.gt-xs="15px" fxFlex>
+        <div fxLayout="column" fxFlex></div>
+        <div fxLayout="row" fxLayoutGap="5px" fxFlex>
+          <span fxLayoutAlign="center center" fxFlex="5">
+            <mat-checkbox color="primary" formControlName="sign"></mat-checkbox>
+          </span>
+          <mat-form-field fxFlex="95">
+            <mat-label>{{ 'invoiceComponent.authorizedPersonSign' | translate }}</mat-label>
+            <input matInput formControlName="signValue" [errorStateMatcher]="errorStateMatcher">
+            <mat-error *ngIf="this.payment.hasError('signValueRequired')">
+              {{ 'invoiceComponent.signCheckedButEmpty' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px" fxFlex>
+    <button #submitButton mat-raised-button class="submit-button" color="primary" (click)="handleSubmit()">{{ submitText }}</button>
+    <button *ngIf="editView" mat-raised-button class="submit-button" (click)="handleSaveAsNew()">{{ 'invoiceComponent.saveAsNew' | translate }}</button>
+  </div>
+</div>

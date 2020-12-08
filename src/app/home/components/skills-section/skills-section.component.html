@@ -1,0 +1,8 @@
+<div class="skills-container" fxLayout.gt-xs="row" fxLayout.lt-sm="column" fxLayoutGap="5px" fxFlex.gt-md="50" fxFlex.lt-lg="100">
+  <div *ngFor="let column of columns" fxLayout="column" fxLayoutGap="5px" fxFlex>
+    <div *ngFor="let elements of column" fxLayout="row" fxLayoutGap="5px">
+      <img [src]="'assets/images/' + elements.image">
+      <span>{{ elements.name }}</span>
+    </div>
+  </div>
+</div>

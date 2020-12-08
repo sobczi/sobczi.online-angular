@@ -1,0 +1,27 @@
+$mm: 'montserrat-medium';
+
+.pointer:hover {
+  cursor: pointer;
+}
+
+.position {
+  font-family: $mm;
+  font-size: 11pt;
+}
+
+.date-ranges {
+  font-family: $mm;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 10pt;
+  font-style: italic;
+}
+
+.link {
+  text-decoration: underline;
+  font-style: italic;
+}
+
+.description {
+  font-family: $mm;
+  padding-left: 25px;
+}

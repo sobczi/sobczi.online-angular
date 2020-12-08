@@ -1,0 +1,12 @@
+<div fxLayout="column" fxLayoutGap="15px" fxFlex>
+  <div class="header" fxLayout="row" fxLayoutAlign="center center" fxFlex>{{ data.header }}</div>
+  <div class="content" fxLayout="row" fxLayoutAlign="center center" fxFlex>{{ data.content }}</div>
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px" fxFlex>
+    <button class="submit-button" mat-raised-button color="primary" (click)="handleConfirm()">
+      {{ 'confirmDialogComponent.yes' | translate }}
+    </button>
+    <button class="submit-button" mat-raised-button color="primary" (click)="handleReject()">
+      {{ 'confirmDialogComponent.no' | translate }}
+    </button>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+@import '~@angular/material/theming';
+@import 'styles.scss';
+
+$mb: 'montserrat-bold';
+
+.section {
+  font-family: $mb;
+  font-size: 12pt;
+}
+
+.pt4 {
+  padding-top: 3.5px;
+  color: mat-color($accent);
+}

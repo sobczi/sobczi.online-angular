@@ -1,0 +1,59 @@
+<form [formGroup]="itemForm" fxLayout="column">
+  <div fxLayout.gt-xs="row" fxLayout.lt-sm="column" fxLayoutGap.gt-xs="15px" fxFlex>
+    <mat-form-field fxFlex>
+      <mat-label>{{ 'invoiceComponent.itemOrService' | translate }}</mat-label>
+      <input matInput formControlName="name">
+      <mat-error *ngIf="c.name.hasError('required')">{{ 'shared.fieldRequired' | translate }}</mat-error>
+    </mat-form-field>
+    <mat-form-field fxFlex>
+      <mat-label>{{ 'invoiceComponent.gtuCode' | translate }}</mat-label>
+      <mat-select formControlName="gtuCode">
+        <mat-option *ngFor="let gtuCode of gtuCodes" [value]="gtuCode.value">{{ gtuCode.translation | translate }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="c.gtuCode.hasError('required')">{{ 'invoiceComponent.requiredVat' | translate }}</mat-error>
+    </mat-form-field>
+  </div>
+  <div fxLayout.gt-xs="row" fxLayout.lt-sm="column" fxLayoutGap.gt-xs="15px" fxFlex>
+    <mat-form-field fxFlex>
+      <mat-label>{{ 'invoiceComponent.amount' | translate }}</mat-label>
+      <input matInput formControlName="quantity" (keyup)="handleFormatQuantity()">
+      <mat-error *ngIf="c.quantity.hasError('required')">{{ 'shared.fieldRequired' | translate }}</mat-error>
+      <mat-error *ngIf="c.quantity.hasError('invalidNumber')">{{ 'invoiceComponent.inproperFormat' | translate }}</mat-error>
+    </mat-form-field>
+    <mat-form-field fxFlex>
+      <mat-label>{{ 'invoiceComponent.unit' | translate }}</mat-label>
+      <mat-select formControlName="unit">
+        <mat-option *ngFor="let unit of units" [value]="unit.value">
+          {{ unit.translation | translate }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="c.unit.hasError('required')">{{ 'shared.fieldRequired' | translate }}</mat-error>
+    </mat-form-field>
+  </div>
+  <div fxLayout.gt-xs="row" fxLayout.lt-sm="column" fxLayoutGap.gt-xs="15px" fxFlex>
+    <mat-form-field fxFlex>
+      <mat-label>{{ 'invoiceComponent.netValue' | translate }}</mat-label>
+      <input matInput formControlName="netto" (keyup)="handleFormatNetto($event)">
+      <mat-error *ngIf="c.netto.hasError('required')">{{ 'shared.fieldRequired' | translate }}</mat-error>
+      <mat-error *ngIf="c.netto.hasError('invalidNumber')">{{ 'invoiceComponent.inproperFormat' | translate }}</mat-error>
+    </mat-form-field>
+    <mat-form-field fxFlex>
+      <mat-label>{{ 'invoiceComponent.vatRate' | translate }}</mat-label>
+      <mat-select formControlName="vatPercentage">
+        <mat-option *ngFor="let vatRate of VatRates" [value]="vatRate.value">
+          {{ vatRate.translation | translate }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div fxLayout.gt-xs="row" fxLayout.lt-sm="column" fxLayoutGap.gt-xs="15px" fxFlex>
+    <mat-form-field fxFlex>
+      <mat-label>{{ 'invoiceComponent.vatValue' | translate }}</mat-label>
+      <input matInput formControlName="vat">
+    </mat-form-field>
+    <mat-form-field fxFlex>
+      <mat-label>{{ 'invoiceComponent.grossValue' | translate }}</mat-label>
+      <input matInput formControlName="brutto">
+    </mat-form-field>
+  </div>
+</form>

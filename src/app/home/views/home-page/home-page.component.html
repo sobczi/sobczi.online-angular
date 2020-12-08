@@ -1,0 +1,23 @@
+<div class="container" fxLayout.gt-sm="row" fxLayout.lt-md="column">
+  <div fxLayout.gt-sm="column" fxLayout.lt-md="row" fxLayoutGap="25px">
+    <app-side-panel fxFlex></app-side-panel>
+  </div>
+  <div class="content" fxLayout="column" fxLayoutGap="50px" fxFlex>
+    <div fxLayout="column" fxLayoutGap="25px" fxFlex>
+      <app-section-header [section]="educationSection"></app-section-header>
+      <app-education-section></app-education-section>
+    </div>
+    <div fxLayout="column" fxLayoutGap="25px" fxFlex>
+      <app-section-header [section]="experienceSection"></app-section-header>
+      <app-experience-section></app-experience-section>
+    </div>
+    <div fxLayout="column" fxLayoutGap="25px" fxFlex>
+      <app-section-header [section]="skillsSection"></app-section-header>
+      <app-skills-section [columns]="skillsColumns"></app-skills-section>
+    </div>
+    <div fxLayout="column" fxLayoutGap="25px" fxFlex>
+      <app-section-header [section]="languageSection"></app-section-header>
+      <app-languages-section [rows]="languagesRows"></app-languages-section>
+    </div>
+  </div>
+</div>

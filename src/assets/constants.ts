@@ -1,0 +1,32 @@
+export const IconsPath = '/assets/icons/'
+
+export const Icons = [
+  { name: 'lock', path: `${IconsPath}/lock-24px.svg` },
+  { name: 'visibility_off', path: `${IconsPath}/visibility_off-24px.svg` },
+  { name: 'visibility_on', path: `${IconsPath}/visibility-24px.svg` },
+  { name: 'logout', path: `${IconsPath}/exit_to_app-24px.svg` },
+  { name: 'login', path: `${IconsPath}/login-24px.svg` },
+  { name: 'home', path: `${IconsPath}/home-24px.svg` },
+  { name: 'history', path: `${IconsPath}/history-24px.svg` },
+  { name: 'add', path: `${IconsPath}/note_add-24px.svg` },
+  { name: 'download', path: `${IconsPath}/cloud_download-24px.svg` },
+  { name: 'delete', path: `${IconsPath}/delete-24px.svg` },
+  { name: 'edit', path: `${IconsPath}/create-24px.svg` },
+  { name: 'file', path: `${IconsPath}/file-24px.svg` },
+  { name: 'register', path: `${IconsPath}/person_add-24px.svg` },
+  { name: 'management', path: `${IconsPath}/supervised_user_circle-24px.svg` },
+  { name: 'settings', path: `${IconsPath}/settings-24px.svg` },
+  { name: 'experience', path: `${IconsPath}/card_travel-24px.svg` },
+  { name: 'email', path: `${IconsPath}/email-24px.svg` },
+  { name: 'expand_less', path: `${IconsPath}/expand_less-24px.svg` },
+  { name: 'expand_more', path: `${IconsPath}/expand_more-24px.svg` },
+  { name: 'school', path: `${IconsPath}/school-24px.svg` },
+  { name: 'skills', path: `${IconsPath}/extension-24px.svg` },
+  { name: 'language', path: `${IconsPath}/language-24px.svg` },
+  { name: 'phone', path: `${IconsPath}/call-24px.svg` },
+  { name: 'menu', path: `${IconsPath}/menu-24px.svg` },
+  { name: 'clock', path: `${IconsPath}/alarm-24px.svg` },
+  { name: 'play', path: `${IconsPath}/play_arrow-24px.svg` },
+  { name: 'pause', path: `${IconsPath}/pause-24px.svg` },
+  { name: 'clear', path: `${IconsPath}/clear-24px.svg` }
+]

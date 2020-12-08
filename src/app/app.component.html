@@ -1,0 +1,8 @@
+<div fxLayout="column" fxFlexFill>
+  <app-header></app-header>
+  <div fxLayout="column" fxFlex>
+    <div fxFlex>
+      <router-outlet (activate)="handleRouterActivate()"></router-outlet>
+    </div>
+  </div>
+</div>

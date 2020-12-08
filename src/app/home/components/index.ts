@@ -1,0 +1,7 @@
+export * from './education-section/education-section.component'
+export * from './experience-section/experience-section.component'
+export * from './languages-section/languages-section.component'
+export * from './section-header/section-header.component'
+export * from './side-panel/side-panel.component'
+export * from './skills-section/skills-section.component'
+export * from './contact-elements/contact-elements.component'

@@ -1,0 +1,182 @@
+{
+  "shared": {
+    "invalidEmail": "Wygląda na to, że wprowadzono niepoprawny adres email.",
+    "loggedOut": "Wylogowano",
+    "bye": "Żegnaj",
+    "login": "Zaloguj się",
+    "fieldRequired": "To pole jest wymagane.",
+    "username": "Nazwa użytkownika",
+    "sendRequest": "Wyślij zapytanie",
+    "homepage": "Strona główna",
+    "email": "Email",
+    "fullName": "Pełna nazwa",
+    "password": "Hasło",
+    "repeatPassword": "Powtórz hasło",
+    "passwordsNotEqual": "Hasła są inne.",
+    "emailOccupied": "Adres email jest zajęty.",
+    "passwordPattern": "Hasło powinno składać się z minimum 8 znaków, w tym minimum jednej cyfry.",
+    "backToLogin": "Powrót do logowania",
+    "privilages": "Uprawnienia",
+    "User": "Użytkownik",
+    "Admin": "Admin",
+    "DemoUser": "Użytkownik demo",
+    "registration": "Rejestracja"
+  },
+  "cv": {
+    "WIZUT": "Inżynier oprogramowania, Zachodniopomorski Uniwersytet Technologiczny w Szczecinie",
+    "at": "w",
+    "now": "teraz",
+    "experience": "DOŚWIADCZENIE",
+    "education": "EDUKACJA",
+    "skills": "UMIEJĘTNOŚCI",
+    "langauges": "JĘZYKI",
+    "polish": "Polski",
+    "english": "Angielski",
+    "german": "Niemiecki",
+    "native": "Natywny",
+    "advancedFluent": "Zaawansowany ~ Płynny",
+    "advanced": "Zaawansowany",
+    "ISPLMR": {
+      "firstPart": "W kooperacji z",
+      "secondPart": ", tworzenie i rozwijanie aplikacji internetowych w stosie MEAN dla medycznego centrum do obsługi pacjentów online i offline. Zarządzanie oraz tworzenie dokumentacji medycznej, rezerwacji, harmonogramów, płatności. Trzy aplikacje dla pacjentów, lekarzy oraz kadry zarządzającej. Integracje z zewnętrznymi systami poprzez REST API oraz SOAP. Backend oparty o mikroserwisy napisane w Node używając TypeScript. Frontend w Angularze z abstrakcją często używanych elementów do bibliotek. Praca naszego zespołu dostępna jest na",
+      "thirdPart": "ogólnodostępnej stronie",
+      "fourthPart": "dla pacjentów, przy której byłem odpowiedzialny za około 75% pracy frontendowej. Zdalna praca w małym zespole."
+    },
+    "contact": "Kontakt"
+  },
+  "historyComponent": {
+    "notFound": "Nie znaleziono faktur.",
+    "header": "HISTORIA FAKTUR",
+    "searchInvoice": "Wyszukaj fakturę",
+    "dateFrom": "Data od",
+    "dateTo": "Data do",
+    "clearFilters": "Wyczyść filtry",
+    "issued": "Wystawiona",
+    "name": "Nazwa",
+    "gross": "Brutto",
+    "client": "Klient",
+    "edit": "Edytuj",
+    "download": "Pobierz",
+    "downloadMultipleElements": "Pobierz wiele elementów"
+  },
+  "headerComponent": {
+    "historyOfInvoices": "Historia faktur",
+    "createInvoice": "Wystaw fakturę",
+    "logout": "Wyloguj się",
+    "settings": "Ustawienia",
+    "management": "Zarządzanie"
+  },
+  "loginComponent": {
+    "login": "LOGOWANIE",
+    "loggedIn": "Zalogowano!",
+    "welcome": "Witaj",
+    "errorLogin": {
+      "header": "Błąd podczas logowania",
+      "content": "Upewnij się, że wprowadziłeś poprawny login oraz hasło."
+    },
+    "forgotPassword": "Zapomniałeś hasła?"
+  },
+  "registerComponent": {
+    "registrationFailed": "Rejestracja nie powiodła się",
+    "registrationSuccess": "Wysłano zapytanie o rejestrację",
+    "registrationInfo": "W przypadku akceptacji prośby, na wskazany adres email zostanie wysłane pierwszorazowe hasło do logowania."
+  },
+  "invoiceComponent": {
+    "paymentAndSign": "Płatność oraz podpis",
+    "addPosition": "Dodaj pozycję",
+    "orderNumber": "Nazwa/numer faktury",
+    "issue": "Wystaw fakturę",
+    "itemOrService": "Nazwa towaru lub usługi",
+    "requiredVat": "To pole jest wymagane w przypadku towarów opodatkowanych VAT.",
+    "amount": "Ilość",
+    "inproperValue": "Wprowadzono niepoprawną wartość.",
+    "unit": "Jednostka",
+    "vatRate": "Stawka VAT",
+    "taxId": "NIP",
+    "taxIdFormat": "Numer NIP powinien składać się z 10ciu cyfr.",
+    "address": "Ulica, numer domu oraz lokalu",
+    "postalCode": "Kod pocztowy",
+    "city": "Miasto",
+    "postalCodeFormat": "Kod pocztowy powinien składać się z 5ciu liczb.",
+    "netValue": "Wartość netto",
+    "sale": "Sprzedaż",
+    "vatValue": "Wartość VAT",
+    "grossValue": "Wartość brutto",
+    "deletePosition": "Usuń pozycję",
+    "accountNumber": "Numer konta",
+    "accountNumber26Digits": "Numer konta powinien składać się z 26 cyfr.",
+    "paymentType": "Sposób płatności",
+    "authorizedPersonSign": "Podpis osoby upoważnionej do wystawienia",
+    "signCheckedButEmpty": "Podpis został zaznaczony ale nie jest wypełniony.",
+    "document": "Dokument",
+    "documentType": "Typ dokumentu",
+    "dateOfIssue": "Data wystawienia",
+    "seller": "Sprzedawca",
+    "buyer": "Nabywca",
+    "addInvoice": "WYSTAW FAKTURĘ",
+    "editInvoice": "EDYTUJ FAKTURĘ",
+    "newMockup": "Za dużo? Uzupełnij przykładowymi danymi",
+    "exampleDisclaimer": "Nieważne jak uzupełnisz te formularze - w rezultacie zostanie wygenerowany przykładowy .pdf z przykładowymi danymi.",
+    "vatInvoice": "Faktura VAT",
+    "salesInvoice": "Faktura FS",
+    "piecesUnit": "szt.",
+    "monthsUnit": "mies.",
+    "vatExempt": "zw.",
+    "gtuCode": "Kod GTU",
+    "saveAsNew": "Zapisz jako nową",
+    "saveChanges": "Zapisz zmiany",
+    "transfer": "Przelew"
+  },
+  "manageComponent": {
+    "header": "ZARZĄDZANIE",
+    "accountActive": "Konto aktywne",
+    "deleteUser": {
+      "header": "Usuwanie użytkownika",
+      "content": "Czy jesteś pewien, że chcesz usunąć użytkownika i wszystkie jego informacje z systemu?"
+    },
+    "created": "Utworzone",
+    "lastLogged": "Ostatnie logowanie"
+  },
+  "resetComponent": {
+    "resetPassword": "Zmiana hasła",
+    "changePassword": "Zmień hasło",
+    "cannotChange": "Nie można zmienić hasła",
+    "inproperURL": "Wygląda na to, że klucz resetowania hasła wygasł."
+  },
+  "settingsComponent": {
+    "deleteAccount": "USUŃ KONTO",
+    "updateData": "Aktualizuj dane",
+    "updatePassword": "Aktualizuj hasło",
+    "basicData": "DANE PODSTAWOWE",
+    "role": "Uprawnienia",
+    "updateDataFailed": "Aktualizacja danych nie powiodła się",
+    "dataUpdateSuccessfuly": {
+      "header": "Pomyślnia aktualizacja danych",
+      "content": "Twoje dane zostały zaaktualizowane."
+    },
+    "passwordUpdateSuccessfuly": {
+      "header": "Pomyślna aktualizacja hasła",
+      "content": "Twoje hasło zostało zaaktualizowane."
+    },
+    "accountDeletion": {
+      "header": "Usuwanie konta",
+      "content": "Czy jesteś pewien, że chcesz usunąć konto i wszystkie swoje informacje z systemu?"
+    }
+  },
+  "forgotComponent": {
+    "passwordRecover": "Odzyskiwanie hasła",
+    "resetPassword": "Resetuj hasło",
+    "ifExistsWasSent": "Email z adresem do resetu hasła został wysłany na email powiązany z kontem, jeśli takowe istnieje."
+  },
+  "sessionComponent": {
+    "sessionEnds": "Sesja wygasa",
+    "wantToRefresh": "Czy chcesz ją odświeżyć?"
+  },
+  "confirmDialogComponent": {
+    "yes": "Tak",
+    "no": "Nie"
+  },
+  "simpleDialogComponent": {
+    "close": "Zamknij"
+  }
+}

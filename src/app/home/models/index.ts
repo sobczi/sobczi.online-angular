@@ -1,0 +1,6 @@
+export * from './Language'
+export * from './Section'
+export * from './SkillSection'
+export * from './Links'
+export * from './ContactElement'
+export * from './BasicData'

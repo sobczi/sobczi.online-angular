@@ -1,0 +1,40 @@
+<div fxLayout="row" fxLayoutAlign="center center" fxFlexFill>
+  <mat-card class="small-form" fxLayout="column" fxLayoutGap="10px" fxFlex.gt-xs="50" fxFlex.lt-sm="100">
+    <div class="header font-medium" fxLayout="row" fxLayoutAlign="center center">
+      <mat-icon svgIcon="lock"></mat-icon> {{ 'loginComponent.login' | translate }}
+    </div>
+    <form [formGroup]="form" fxLayout="column" fxLayoutGap="10px">
+      <mat-form-field>
+        <mat-label>{{ 'shared.email' | translate }}</mat-label>
+        <input matInput formControlName="email">
+        <mat-error>{{ 'shared.fieldRequired' | translate }}</mat-error>
+        <mat-error *ngIf="form.controls.email.hasError('pattern')">{{ 'shared.invalidEmail' | translate }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ 'shared.password' | translate }}</mat-label>
+        <input [type]="passwordIsVisible ? 'text' : 'password'" matInput formControlName="password">
+        <mat-icon
+          matSuffix
+          class="pointer"
+          [svgIcon]="passwordIsVisible ? 'visibility_on' : 'visibility_off'"
+          (click)="passwordIsVisible = !passwordIsVisible"
+        ></mat-icon>
+        <mat-error>{{ 'shared.fieldRequired' | translate }}</mat-error>
+      </mat-form-field>
+      <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px">
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <span class="snippet" routerLink="/guest/register">{{ 'shared.registration' | translate }}</span>
+          <span class="snippet" routerLink="/guest/forgot-password">{{ 'loginComponent.forgotPassword' | translate }}</span>
+        </div>
+        <button
+          mat-raised-button
+          class="submit-button font-medium"
+          color="primary"
+          [disabled]="form.invalid"
+          (click)="login()"
+          type="submit"
+        >{{ 'shared.login' | translate }}</button>
+      </div>
+    </form>
+  </mat-card>
+</div>

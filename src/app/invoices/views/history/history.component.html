@@ -1,0 +1,140 @@
+<div class="container" fxLayout="column" fxFlex>
+  <div class="header" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
+    <mat-icon svgIcon="history"></mat-icon>
+    <span>{{ 'historyComponent.header' | translate }}</span>
+  </div>
+  <div
+    class="search-section"
+    fxLayout.gt-sm="row"
+    fxLayoutGap.gt-sm="15px"
+    fxLayout.lt-md="column">
+    <mat-form-field fxFlex>
+      <mat-label>{{ 'historyComponent.searchInvoice' | translate }}</mat-label>
+      <input matInput [(ngModel)]="searchText" (ngModelChange)="handleFiltersChange()">
+    </mat-form-field>
+    <mat-form-field fxFlex>
+      <mat-label>{{ 'historyComponent.dateFrom' | translate }}</mat-label>
+      <input matInput [matDatepicker]="pickerFrom" [(ngModel)]="dateFrom" (ngModelChange)="handleFiltersChange()">
+      <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+      <mat-datepicker #pickerFrom></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field fxFlex>
+      <mat-label>{{ 'historyComponent.dateTo' | translate }}</mat-label>
+      <input matInput [matDatepicker]="pickerTo" [(ngModel)]="dateTo" (ngModelChange)="handleFiltersChange()">
+      <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+      <mat-datepicker #pickerTo></mat-datepicker>
+    </mat-form-field>
+    <div fxLayout="column" fxLayoutAlign="center center" fxFlex>
+      <button mat-raised-button class="submit-button" (click)="handleClearFilters()">{{ 'historyComponent.clearFilters' | translate }}</button>
+    </div>
+  </div>
+  <div class="table-header" fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutGap="15px">
+    <div
+      fxLayout.gt-sm="column"
+      fxLayout.lt-md="row"
+      fxFlex.lt-md="100"
+      fxLayoutAlign="center center">
+      <mat-icon
+        class="icons-element download-pdfs"
+        svgIcon="download"
+        (click)="handleDownloadMultiple()"
+        [matTooltip]="'historyComponent.downloadMultipleElements' | translate"
+      ></mat-icon>
+    </div>
+    <div
+      fxLayout.gt-sm="column"
+      fxFlex.gt-sm="10"
+      fxLayout.lt-md="row"
+      fxLayoutAlign="center center">
+      {{ 'historyComponent.issued' | translate }}
+    </div>
+    <div
+      fxLayout.gt-sm="column"
+      fxFlex.gt-sm="15"
+      fxLayout.lt-md="row"
+      fxLayoutAlign="center center">
+      {{ 'historyComponent.name' | translate }}
+    </div>
+    <div
+      fxLayout.gt-sm="column"
+      fxFlex.gt-sm="10"
+      fxLayout.lt-md="row"
+      fxLayoutAlign="center center">
+      {{ 'historyComponent.gross' | translate }}
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center center" fxFlex>{{ 'historyComponent.client' | translate }}</div>
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <div class="icons-row" fxLayout="row" fxLayoutGap="15px" fxFlex>
+        <div fxLayout="column" fxLayoutAlign="center center">{{ 'historyComponent.edit' | translate }}</div>
+        <div fxLayout="column" fxLayoutAlign="center center">{{ 'historyComponent.download' | translate }}</div>
+        <div fxLayout="column" fxLayoutAlign="center center">{{ 'shared.delete' | translate }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="table" fxLayout="column" fxFlex>
+    <div
+      *ngIf="!visibleInvoices.length"
+      class="not-found"
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      fxFlex>
+      {{ 'historyComponent.notFound' | translate }}
+    </div>
+    <div *ngIf="visibleInvoices.length" fxLayout="column" fxFlex>
+    <div
+      *ngFor="let invoice of visibleInvoices"
+      class="table-row"
+      fxLayout.gt-sm="row"
+      fxLayout.lt-md="column"
+      fxLayoutGap="15px">
+      <div
+        fxLayout.gt-sm="column"
+        fxLayout.lt-md="row"
+        fxFlex.lt-md="100"
+        fxLayoutAlign="center center">
+        <mat-checkbox
+          class="icons-element"
+          color="primary"
+          (change)="handleMultipleChange(invoice.id)"
+          fxLayoutAlign="center center"
+        ></mat-checkbox>
+      </div>
+      <div
+        fxLayout.gt-sm="column"
+        fxFlex.gt-sm="10"
+        fxLayout.lt-md="row"
+        fxLayoutAlign="center center">
+        {{ invoice.base.date | date: 'dd-MM-yyyy' }}
+      </div>
+      <div
+        fxLayout.gt-sm="column"
+        fxFlex.gt-sm="15"
+        fxLayout.lt-md="row"
+        fxLayoutAlign="center center">
+        {{ invoice.base.type }} {{ invoice.base.number }}
+      </div>
+      <div
+        fxLayout.gt-sm="column"
+        fxFlex.gt-sm="10"
+        fxLayout.lt-md="row"
+        fxLayoutAlign="center center">
+        {{ summarizeBrutto(invoice.items) }}
+      </div>
+      <div fxLayout="column" fxLayoutAlign="center center" fxFlex style="word-wrap: break-word;">{{ invoice.buyer.name }}</div>
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <div class="icons-row" fxLayout="row" fxLayoutGap="15px" fxFlex>
+          <div fxLayout="column" fxLayoutAlign="center center">
+            <mat-icon svgIcon="edit" (click)="handleEdit(invoice.id)" matTooltip="Edytuj"></mat-icon>
+          </div>
+          <div fxLayout="column" fxLayoutAlign="center center">
+            <mat-icon svgIcon="download" (click)="handleDownload(invoice.id)" matTooltip="Pobierz"></mat-icon>
+          </div>
+          <div fxLayout="column" fxLayoutAlign="center center">
+            <mat-icon svgIcon="delete" (click)="handleDelete(invoice.id)" matTooltip="Usuń"></mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>

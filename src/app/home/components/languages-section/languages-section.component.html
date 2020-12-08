@@ -1,0 +1,6 @@
+<div fxLayout="column" fxLayoutGap="25px">
+  <div *ngFor="let language of rows" fxLayout="column" fxLayoutGap="5px">
+    <span class="language-name">{{ language.name | translate }}</span>
+    <span class="language-level">{{ language.level | translate }}</span>
+  </div>
+</div>

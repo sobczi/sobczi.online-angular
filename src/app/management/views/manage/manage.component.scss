@@ -1,0 +1,41 @@
+$fcolor: rgba(0, 0, 0, 0.1);
+$scrollWidth: 17px;
+$borderWidth: 1px;
+$rowHeight: 40px;
+$fontMM: 'montserrat-medium';
+$iconsWidth: 60px;
+$rows-paddings: $scrollWidth $scrollWidth $scrollWidth 0px;
+
+mat-icon:hover {
+  cursor: pointer;
+  transform: scale(1.25);
+}
+
+:host::ng-deep .mat-select-value {
+  text-align: center;
+}
+
+.container {
+  margin: 1.5% 5%;
+  border-radius: 5px;
+  min-height: 800px;
+}
+
+.header {
+  font-family: 'montserrat-medium';
+  font-size: 18pt;
+  padding-top: 15px;
+}
+
+.table-header {
+  font-family: $fontMM;
+  font-size: 11pt;
+  background-color: rgba(0, 0, 0, 0.05);
+  border: $borderWidth solid $fcolor;
+  padding: $rows-paddings;
+}
+
+.table-row {
+  padding: $rows-paddings;
+  border-bottom: $borderWidth solid $fcolor;
+}
