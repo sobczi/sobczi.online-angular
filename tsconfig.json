@@ -25,6 +25,7 @@
       "@pomodoro/*": ["src/app/pomodoro/*"],
       "@guest/*": ["src/app/guest/*"],
       "@home/*": ["src/app/home/*"],
+      "@auth/*": ["src/app/auth/*"],
       "@env/*": ["src/environments/*"],
       "@assets/*": ["src/assets/*"],
       "mainstyle": ["src/styles.scss"]

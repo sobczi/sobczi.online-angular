@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
 
-import { AdminDemoGuard, LoggedGuard, NotLoggedGuard } from '@shared/guards'
+import { AdminGuard, LoggedGuard, NotLoggedGuard } from '@shared/guards'
 
 const routes: Routes = [
   {
@@ -41,7 +41,7 @@ const routes: Routes = [
     path: 'management',
     loadChildren: () =>
       import('@management/management.module').then(m => m.ManagementModule),
-    canActivate: [LoggedGuard, AdminDemoGuard]
+    canActivate: [LoggedGuard, AdminGuard]
   },
   {
     path: '**',

@@ -13,7 +13,7 @@ export class ManagementService {
   fetchUsers (): Observable<User[]> {
     return this.http.get<{ users: User[] }>(environment.getUsers).pipe(
       map(response => response.users),
-      catchError(_ => of([]))
+      catchError(() => of([]))
     )
   }
 

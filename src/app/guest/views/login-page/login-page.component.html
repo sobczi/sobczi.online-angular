@@ -3,7 +3,11 @@
     <div class="header font-medium" fxLayout="row" fxLayoutAlign="center center">
       <mat-icon svgIcon="lock"></mat-icon> {{ 'loginComponent.login' | translate }}
     </div>
-    <form [formGroup]="form" fxLayout="column" fxLayoutGap="10px">
+    <form
+      [formGroup]="form"
+      fxLayout="column"
+      fxLayoutGap="10px"
+      (submit)="handleLoginSubmit()">
       <mat-form-field>
         <mat-label>{{ 'shared.email' | translate }}</mat-label>
         <input matInput formControlName="email">
@@ -31,7 +35,6 @@
           class="submit-button font-medium"
           color="primary"
           [disabled]="form.invalid"
-          (click)="login()"
           type="submit"
         >{{ 'shared.login' | translate }}</button>
       </div>

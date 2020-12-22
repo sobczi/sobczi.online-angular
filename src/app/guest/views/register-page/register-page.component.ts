@@ -1,14 +1,16 @@
-import { Component } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { TranslateService } from '@ngx-translate/core'
+import { Actions, ofType } from '@ngrx/effects'
+import { Component } from '@angular/core'
 import { Router } from '@angular/router'
+import { takeUntil } from 'rxjs/operators'
 import { ReplaySubject } from 'rxjs'
-import { filter, takeUntil } from 'rxjs/operators'
 
 import { DialogService } from '@shared/services'
 import { EmailPattern } from '@shared/validators'
 import { GuestFacade } from '@guest/facades'
 import { SharedFacade } from '@shared/facades'
+import { RegisterUserResponse } from '@guest/store'
 
 @Component({
   selector: 'app-register-page',
@@ -27,12 +29,17 @@ export class RegisterPageComponent {
     private readonly dialogService: DialogService,
     private readonly facade: GuestFacade,
     private readonly sharedFacade: SharedFacade,
+    private readonly actions$: Actions,
     formBuilder: FormBuilder
   ) {
     this.form = formBuilder.group({
       fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern(EmailPattern)]]
     })
+
+    this.actions$
+      .pipe(ofType(RegisterUserResponse), takeUntil(this.unsubscribe$))
+      .subscribe(this.handleRegisterUserResponse.bind(this))
   }
 
   handleRegister (): void {
@@ -51,23 +58,19 @@ export class RegisterPageComponent {
           )
           return this.form.patchValue({ email: '' })
         }
-        return this.facade
-          .createUser(email, fullName)
-          .pipe(
-            takeUntil(this.unsubscribe$),
-            filter(response => !!response)
-          )
-          .subscribe(() => {
-            this.dialogService.openSimpleDialog(
-              this.translate('registerComponent.registrationSuccess'),
-              this.translate('registerComponent.registrationInfo')
-            )
-            this.router.navigate(['/home'])
-          })
+        this.facade.dispatchRegisterUserRequest(email, fullName)
       })
   }
 
   handleLogin (): void {
     this.router.navigate(['/guest/login'])
+  }
+
+  private handleRegisterUserResponse (): void {
+    this.dialogService.openSimpleDialog(
+      this.translate('registerComponent.registrationSuccess'),
+      this.translate('registerComponent.registrationInfo')
+    )
+    this.router.navigate(['/home'])
   }
 }

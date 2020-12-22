@@ -2,6 +2,7 @@ import { Component } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { TranslateService } from '@ngx-translate/core'
+import { Actions, ofType } from '@ngrx/effects'
 import { filter, map, takeUntil } from 'rxjs/operators'
 import { ReplaySubject } from 'rxjs'
 
@@ -12,6 +13,10 @@ import {
   PasswordsMustEqual,
   CrossFieldErrorMatcher
 } from '@shared/validators'
+import {
+  ResetPasswordResponseFail,
+  ResetPasswordResponseSuccess
+} from '@guest/store'
 
 @Component({
   selector: 'app-reset-password',
@@ -24,14 +29,12 @@ export class ResetPasswordComponent {
   readonly errorStateMatcher = new CrossFieldErrorMatcher()
   private resetKey: string
   private readonly unsubscribe$ = new ReplaySubject<void>()
-  private readonly translate: (
-    value: string
-  ) => string = this.translateService.instant.bind(this.translateService)
   constructor (
     private readonly dialogService: DialogService,
     private readonly translateService: TranslateService,
     private readonly router: Router,
     private readonly facade: GuestFacade,
+    private readonly actions$: Actions,
     activatedRoute: ActivatedRoute,
     formBuilder: FormBuilder
   ) {
@@ -53,20 +56,33 @@ export class ResetPasswordComponent {
       },
       { validators: PasswordsMustEqual }
     )
+
+    this.actions$
+      .pipe(ofType(ResetPasswordResponseSuccess), takeUntil(this.unsubscribe$))
+      .subscribe(this.handleResetPasswordResponseSuccess.bind(this))
+
+    this.actions$
+      .pipe(ofType(ResetPasswordResponseFail), takeUntil(this.unsubscribe$))
+      .subscribe(this.handleResetPasswordResponseFail.bind(this))
   }
 
   handlePasswordChange (): void {
     const newPassword = this.form.controls.password.value
-    this.facade
-      .resetPassword(this.resetKey, newPassword)
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(result =>
-        result
-          ? this.router.navigate(['/guest/login'])
-          : this.dialogService.openSimpleDialog(
-              this.translate('resetComponent.cannotChange'),
-              this.translate('resetComponent.inproperURL')
-            )
-      )
+    this.facade.dispatchResetPasswordRequest(this.resetKey, newPassword)
+  }
+
+  private handleResetPasswordResponseSuccess (): void {
+    this.dialogService.openSimpleDialog(
+      this.translateService.instant('resetComponent.passwordChanged.header'),
+      this.translateService.instant('resetComponent.passwordChanged.content')
+    )
+    this.router.navigate(['/guest/login'])
+  }
+
+  private handleResetPasswordResponseFail (): void {
+    this.dialogService.openSimpleDialog(
+      this.translateService.instant('resetComponent.cannotChange'),
+      this.translateService.instant('resetComponent.inproperURL')
+    )
   }
 }

@@ -17,8 +17,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { TranslatePipe, TranslateService } from '@ngx-translate/core'
 import { DatePipe } from '@angular/common'
 import { Router } from '@angular/router'
+import { Actions, ofType } from '@ngrx/effects'
 import { ReplaySubject } from 'rxjs'
-import { take, takeUntil } from 'rxjs/operators'
+import { filter, takeUntil } from 'rxjs/operators'
 
 import {
   InvoiceItemFormComponent,
@@ -42,12 +43,10 @@ import {
   Subject
 } from '@invoices/models'
 import { InvoicesFacade } from '@invoices/facades'
-import { MOCKED_SUBJECTS, MOCKED_ITEMS } from '@invoices/mocks'
-import { AccountRoles } from '@shared/models'
 import { CustomDateAdapter, MY_DATE_FORMATS } from '@shared/adapters'
 import { DialogService } from '@shared/services'
 import { CrossFieldErrorMatcher } from '@shared/validators'
-import { AuthFacade } from '@shared/facades'
+import { CreateInvoiceResponse, UpdateInvoiceResponse } from '@invoices/store'
 
 @Component({
   selector: 'app-invoice',
@@ -99,10 +98,6 @@ export class InvoiceComponent implements AfterViewInit, OnDestroy {
   private readonly initialItem: Item
   private readonly unsubscribe$ = new ReplaySubject<void>()
 
-  get isDemoUserAndNewMode (): boolean {
-    return this.authFacade.user.role === AccountRoles.DemoUser && !this.editView
-  }
-
   get submitText (): string {
     return this.editView
       ? this.translateService.instant('invoiceComponent.saveChanges')
@@ -129,13 +124,13 @@ export class InvoiceComponent implements AfterViewInit, OnDestroy {
   }
 
   constructor (
-    private readonly authFacade: AuthFacade,
     private readonly dialogService: DialogService,
     private readonly router: Router,
     private readonly dp: DatePipe,
     private readonly cdref: ChangeDetectorRef,
     private readonly translateService: TranslateService,
     private readonly facade: InvoicesFacade,
+    private readonly actions$: Actions,
     formBuilder: FormBuilder
   ) {
     this.editView = this.router.url.includes('edit')
@@ -177,42 +172,29 @@ export class InvoiceComponent implements AfterViewInit, OnDestroy {
     this.payment.controls.sign.valueChanges
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(this.handleSignChanges.bind(this))
+
+    this.actions$
+      .pipe(ofType(CreateInvoiceResponse), takeUntil(this.unsubscribe$))
+      .subscribe(this.handleCreateInvoiceResponse.bind(this))
+
+    this.actions$
+      .pipe(ofType(UpdateInvoiceResponse), takeUntil(this.unsubscribe$))
+      .subscribe(this.handleUpdateInvoiceResponse.bind(this))
   }
 
   ngAfterViewInit (): void {
-    this.patchFormValueIfEditAllowed()
+    this.facade.currentInvoice$
+      .pipe(
+        filter(() => this.editView),
+        takeUntil(this.unsubscribe$)
+      )
+      .subscribe(this.patchFormWithInvoice.bind(this))
     this.cdref.detectChanges()
   }
 
   ngOnDestroy (): void {
     this.unsubscribe$.next()
     this.unsubscribe$.complete()
-  }
-
-  handleFillWithMockup (): void {
-    this.base.patchValue({ number: '01/02' })
-
-    this.payment.patchValue({
-      accountNumber: '01 2345 6789 8765 4321 0123 4567',
-      sign: true,
-      signValue: this.authFacade.user.fullName
-    })
-
-    const subjects = MOCKED_SUBJECTS
-
-    this.subjectForms
-      .toArray()
-      .forEach((s, idx) => s.form.patchValue({ ...subjects[idx] }))
-
-    this.items = MOCKED_ITEMS
-
-    this.itemsForms.changes
-      .pipe(take(1))
-      .subscribe(() =>
-        this.itemsForms.toArray().forEach(c => c.updateFormatOfNumbers())
-      )
-    this.submitButton.nativeElement?.scrollIntoView({ behaviour: 'smooth' })
-    this.cdref.detectChanges()
   }
 
   totalValue (control: string): string {
@@ -266,7 +248,7 @@ export class InvoiceComponent implements AfterViewInit, OnDestroy {
     if (!this.allFormsValid) {
       return
     }
-    this.saveNewInvoice(this.mapInvoiceFromForms())
+    this.facade.dispatchCreateInvoiceRequest(this.mapInvoiceFromForms())
   }
 
   handleSubmit (): void {
@@ -282,29 +264,29 @@ export class InvoiceComponent implements AfterViewInit, OnDestroy {
 
     const mappedInvoice = this.mapInvoiceFromForms()
     if (!this.editView) {
-      this.saveNewInvoice(mappedInvoice)
+      this.facade.dispatchCreateInvoiceRequest(mappedInvoice)
     } else {
-      this.facade
-        .update(mappedInvoice, this.currentInvoiceId)
-        .pipe(takeUntil(this.unsubscribe$))
-        .subscribe(() => {
-          this.dialogService.openSimpleDialog(
-            'Pomyślnie zaaktualizowano fakturę.',
-            ''
-          )
-          this.router.navigate(['/invoices/history'])
-        })
+      this.facade.dispatchUpdateInvoiceRequest(
+        mappedInvoice,
+        this.currentInvoiceId
+      )
     }
   }
 
-  private saveNewInvoice (mappedInvoice: Invoice): void {
-    this.facade
-      .create(mappedInvoice)
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() => {
-        this.dialogService.openSimpleDialog('Pomyślnie wystawiono fakturę.', '')
-        this.router.navigate(['/invoices/history'])
-      })
+  private handleCreateInvoiceResponse (): void {
+    this.dialogService.openSimpleDialog(
+      this.translateService.instant('invoiceComponent.invoiceCreated'),
+      ''
+    )
+    this.router.navigate(['/invoices/history'])
+  }
+
+  private handleUpdateInvoiceResponse (): void {
+    this.dialogService.openSimpleDialog(
+      this.translateService.instant('invoiceComponent.invoiceUpdated'),
+      ''
+    )
+    this.router.navigate(['/invoices/history'])
   }
 
   private mapInvoiceFromForms (): Invoice {
@@ -327,16 +309,6 @@ export class InvoiceComponent implements AfterViewInit, OnDestroy {
     return sign && !group.get('signValue').value
       ? { signValueRequired: true }
       : null
-  }
-
-  private patchFormValueIfEditAllowed (): void {
-    if (!this.editView) {
-      return
-    }
-    this.facade
-      .currentInvoice()
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(this.patchFormWithInvoice.bind(this))
   }
 
   private patchFormWithInvoice (invoice: InvoiceBE | undefined): void {

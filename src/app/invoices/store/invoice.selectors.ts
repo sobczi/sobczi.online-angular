@@ -1,17 +1,12 @@
-import { createSelector } from '@ngrx/store'
+import { createFeatureSelector, createSelector } from '@ngrx/store'
 
-import { AppState } from '@store/types'
+import { InvoicesStoreKey, InvoiceStore } from './types'
 
-const _selectInvoices = (state: AppState) => state.invoices
+const _selectInvoices = createFeatureSelector<InvoiceStore>(InvoicesStoreKey)
 
 export const selectInvoices = createSelector(
   _selectInvoices,
   state => state.invoices
-)
-
-export const selectCurrentInvoiceId = createSelector(
-  _selectInvoices,
-  state => state.currentInvoiceId
 )
 
 export const selectCurrentInvoice = createSelector(_selectInvoices, state =>

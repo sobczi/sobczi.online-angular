@@ -43,9 +43,9 @@ export class GuestService {
       )
   }
 
-  createUser (email: string, fullName: string): Observable<boolean> {
+  registerUser (email: string, fullName: string): Observable<boolean> {
     return this.http
-      .post<{ created: boolean }>(environment.createUser, {
+      .post<{ created: boolean }>(environment.registerUser, {
         email,
         fullName
       })

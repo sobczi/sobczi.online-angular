@@ -5,15 +5,23 @@ import { catchError, map } from 'rxjs/operators'
 
 import { environment } from '@env/environment'
 import { UpdateUserArgs } from '@shared/models'
+import { AuthFacade } from '@auth/facades'
 
 @Injectable()
 export class AccountService {
-  constructor (private readonly http: HttpClient) {}
+  private get userId (): string {
+    return this.authFacade.user.id
+  }
+
+  constructor (
+    private readonly http: HttpClient,
+    private readonly authFacade: AuthFacade
+  ) {}
 
   updateUser (args: UpdateUserArgs): Observable<boolean> {
-    const { userId, email, fullName } = args
+    const { email, fullName } = args
     return this.http
-      .patch<{ result: boolean }>(environment.updateUser(userId), {
+      .patch<{ result: boolean }>(environment.updateUser(this.userId), {
         email,
         fullName
       })
@@ -23,9 +31,9 @@ export class AccountService {
       )
   }
 
-  changePassword (userId: string, password: string): Observable<boolean> {
+  changePassword (password: string): Observable<boolean> {
     return this.http
-      .patch<{ result: boolean }>(environment.changePassword(userId), {
+      .patch<{ result: boolean }>(environment.changePassword(this.userId), {
         password
       })
       .pipe(

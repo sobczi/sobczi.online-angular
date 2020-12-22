@@ -20,7 +20,8 @@
     "User": "Użytkownik",
     "Admin": "Admin",
     "DemoUser": "Użytkownik demo",
-    "registration": "Rejestracja"
+    "registration": "Rejestracja",
+    "somethingWentWrong": "Coś poszło nie tak. Spróbuj ponownie później."
   },
   "cv": {
     "WIZUT": "Inżynier oprogramowania, Zachodniopomorski Uniwersytet Technologiczny w Szczecinie",
@@ -45,6 +46,10 @@
     "contact": "Kontakt"
   },
   "historyComponent": {
+    "deleteModal": {
+      "header": "Usuwanie faktury",
+      "content": "Jesteś pewien, że chcesz usunąć fakturę?"
+    },
     "notFound": "Nie znaleziono faktur.",
     "header": "HISTORIA FAKTUR",
     "searchInvoice": "Wyszukaj fakturę",
@@ -82,6 +87,8 @@
     "registrationInfo": "W przypadku akceptacji prośby, na wskazany adres email zostanie wysłane pierwszorazowe hasło do logowania."
   },
   "invoiceComponent": {
+    "invoiceCreated": "Pomyślnie wystawiono fakturę.",
+    "invoiceUpdated": "Pomyślnie zaaktualizowano fakturę.",
     "paymentAndSign": "Płatność oraz podpis",
     "addPosition": "Dodaj pozycję",
     "orderNumber": "Nazwa/numer faktury",
@@ -141,7 +148,11 @@
     "resetPassword": "Zmiana hasła",
     "changePassword": "Zmień hasło",
     "cannotChange": "Nie można zmienić hasła",
-    "inproperURL": "Wygląda na to, że klucz resetowania hasła wygasł."
+    "inproperURL": "Wygląda na to, że klucz resetowania hasła wygasł.",
+    "passwordChanged": {
+      "header": "Hasło zmienione",
+      "content": "Twoje hasło zostało zmienione pomyślnie."
+    }
   },
   "settingsComponent": {
     "deleteAccount": "USUŃ KONTO",
@@ -149,14 +160,19 @@
     "updatePassword": "Aktualizuj hasło",
     "basicData": "DANE PODSTAWOWE",
     "role": "Uprawnienia",
-    "updateDataFailed": "Aktualizacja danych nie powiodła się",
     "dataUpdateSuccessfuly": {
       "header": "Pomyślnia aktualizacja danych",
       "content": "Twoje dane zostały zaaktualizowane."
     },
+    "dataUpdateFailed": {
+      "header": "Aktualizacja danych nie powiodła się"
+    },
     "passwordUpdateSuccessfuly": {
       "header": "Pomyślna aktualizacja hasła",
       "content": "Twoje hasło zostało zaaktualizowane."
+    },
+    "passwordNotUpdated": {
+      "header": "Aktualizacja hasła nie powiodła się"
     },
     "accountDeletion": {
       "header": "Usuwanie konta",

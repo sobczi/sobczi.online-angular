@@ -1,28 +1,45 @@
 import { createAction, props } from '@ngrx/store'
 
-import { InvoiceBE } from '@invoices/models'
+import { Invoice, InvoiceBE } from '@invoices/models'
 
-export const setInvoices = createAction(
-  '[Invoice Component] Set',
-  props<{ invoices: InvoiceBE[] }>()
+export const CreateInvoiceRequest = createAction(
+  '[Invoice Component] Create Invoice Request',
+  props<{ invoice: Invoice }>()
 )
 
-export const deleteInvoice = createAction(
-  '[Invoice Component] Delete',
+export const CreateInvoiceResponse = createAction(
+  '[Invoice Component] Create Invoice Response',
+  props<{ invoice: InvoiceBE }>()
+)
+
+export const UpdateInvoiceRequest = createAction(
+  '[Invoice Component] Update Invoice Request',
+  props<{ invoice: Invoice; invoiceId: string }>()
+)
+
+export const UpdateInvoiceResponse = createAction(
+  '[Invoice Component] Update Invoice Response',
+  props<{ invoice: InvoiceBE }>()
+)
+
+export const DeleteInvoiceRequest = createAction(
+  '[Invoice Component] Delete Invoice Request',
   props<{ invoiceId: string }>()
 )
 
-export const createInvoice = createAction(
-  '[Invoice Component] Add',
-  props<{ invoice: InvoiceBE }>()
+export const DeleteInvoiceResponse = createAction(
+  '[Invoice Component] Delete Invoice Response',
+  props<{ invoiceId: string }>()
 )
 
-export const updateInvoice = createAction(
-  '[Invoice Component] Update',
-  props<{ invoice: InvoiceBE }>()
+export const GetInvoices = createAction('[Invoice Component] Get Invoices')
+
+export const SetInvoices = createAction(
+  '[Invoice Component] Set Invoices',
+  props<{ invoices: InvoiceBE[] }>()
 )
 
-export const currentInvoiceId = createAction(
-  '[Invoice Component] Edit',
+export const SetCurrentInvoiceId = createAction(
+  '[Invoice Component] Set Current Invoice Id',
   props<{ invoiceId: string }>()
 )

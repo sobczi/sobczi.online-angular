@@ -7,6 +7,7 @@ import {
 } from '@angular/material/core'
 import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
+import { Actions, ofType } from '@ngrx/effects'
 import { filter, takeUntil, tap } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
@@ -15,9 +16,9 @@ import { AppState } from '@store/types'
 import { CustomDateAdapter, MY_DATE_FORMATS } from '@shared/adapters'
 import { DialogService } from '@shared/services'
 import { InvoiceBE, Item } from '@invoices/models'
-import { currentInvoiceId } from '@invoices/store'
+import { DeleteInvoiceResponse } from '@invoices/store'
 import { InvoicesFacade } from '@invoices/facades'
-import { AuthFacade } from '@shared/facades'
+import { AuthFacade } from '@auth/facades'
 
 @Component({
   selector: 'app-history',
@@ -49,20 +50,14 @@ export class HistoryComponent implements OnDestroy {
     private readonly router: Router,
     private readonly translateService: TranslateService,
     private readonly authFacade: AuthFacade,
-    private readonly facade: InvoicesFacade
+    private readonly facade: InvoicesFacade,
+    private readonly actions$: Actions
   ) {
-    this.facade
-      .invoices()
+    this.facade.dispatchGetInvoices()
+    this.facade.invoices$
       .pipe(
         takeUntil(this.unsubscribe$),
-        tap(invoices =>
-          !invoices
-            ? this.facade
-                .fetchInvoices()
-                .pipe(takeUntil(this.unsubscribe$))
-                .subscribe()
-            : undefined
-        ),
+        tap(r => (!r ? this.facade.dispatchGetInvoices() : undefined)),
         filter(invoices => !!invoices)
       )
       .subscribe(invoices => {
@@ -70,6 +65,10 @@ export class HistoryComponent implements OnDestroy {
         this.visibleInvoices = invoices
         this.handleFiltersChange()
       })
+
+    this.actions$
+      .pipe(ofType(DeleteInvoiceResponse), takeUntil(this.unsubscribe$))
+      .subscribe(this.handleFiltersChange.bind(this))
   }
 
   ngOnDestroy (): void {
@@ -106,18 +105,16 @@ export class HistoryComponent implements OnDestroy {
   }
 
   handleEdit (id: string): void {
-    this.store.dispatch(currentInvoiceId({ invoiceId: id }))
+    this.facade.dispatchSetCurrentInvoiceId(id)
     this.router.navigate(['/invoices/edit'])
   }
 
   handleDownload (id: string): void {
     const lang = this.translateService.currentLang
     const userId = this.userId
-    this.facade
-      .accessToken()
-      .subscribe(token =>
-        window.open(environment.getInvoicePdf(lang, userId, token, id), 'blank')
-      )
+    this.facade.accessToken$.subscribe(token =>
+      window.open(environment.getInvoicePdf(lang, userId, token, id), 'blank')
+    )
   }
 
   handleDownloadMultiple (): void {
@@ -127,19 +124,22 @@ export class HistoryComponent implements OnDestroy {
     const lang = this.translateService.currentLang
     const query = this.invoicesIdsToDownload.join('|')
     const userId = this.userId
-    this.facade
-      .accessToken()
-      .subscribe(token =>
-        window.open(
-          environment.getInvoicesPdfs(lang, userId, token, query),
-          'blank'
-        )
+    this.facade.accessToken$.subscribe(token =>
+      window.open(
+        environment.getInvoicesPdfs(lang, userId, token, query),
+        'blank'
       )
+    )
   }
 
   handleDelete (id: string): void {
-    const header = 'Usuwanie faktury'
-    const content = 'Czy na pewno chcesz usunąć wybraną fakturę?'
+    const header = this.translateService.instant(
+      'historyComponent.deleteModal.header'
+    )
+    const content = this.translateService.instant(
+      'historyComponent.deleteModal.content'
+    )
+
     this.dialogSerivce
       .openConfirmDialog(header, content)
       .afterClosed()
@@ -148,10 +148,7 @@ export class HistoryComponent implements OnDestroy {
         this.invoicesIdsToDownload = this.invoicesIdsToDownload.filter(
           i => i !== id
         )
-        this.facade
-          .delete(id)
-          .pipe(takeUntil(this.unsubscribe$))
-          .subscribe(() => this.handleFiltersChange())
+        this.facade.dispatchDeleteInvoiceRequest(id)
       })
   }
 

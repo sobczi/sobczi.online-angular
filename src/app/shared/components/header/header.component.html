@@ -1,0 +1,83 @@
+<mat-toolbar fxLayout="row" color="primary" class="toolbar font-medium">
+  <div fxLayout="column" fxLayoutAlign="center start" fxFlex>
+    <button mat-raised-button routerLink="/home" routerLinkActive="active">
+      <mat-icon svgIcon="home" [matTooltip]="'shared.homepage' | translate"></mat-icon>
+    </button>
+  </div>
+  <div fxLayout="column" fxHide.lt-md fxFlex>
+    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="15px" fxFlex>
+      <ng-container *appIsLogged>
+        <button mat-raised-button routerLink="/invoices/history" routerLinkActive="active">
+          <mat-icon svgIcon="history" [matTooltip]="'headerComponent.historyOfInvoices' | translate"></mat-icon>
+        </button>
+        <button mat-raised-button routerLink="/invoices/new" routerLinkActive="active">
+          <mat-icon svgIcon="add" [matTooltip]="'headerComponent.createInvoice' | translate"></mat-icon>
+        </button>
+        <button mat-raised-button routerLink="/pomodoro" routerLinkActive="active">
+          <mat-icon svgIcon="clock" matTooltip="Pomodoro"></mat-icon>
+        </button>
+        <button *appIsAdmin mat-raised-button routerLink="/management" routerLinkActive="active">
+          <mat-icon svgIcon="management" [matTooltip]="'headerComponent.management' | translate"></mat-icon>
+        </button>
+        <button mat-raised-button routerLink="/account" routerLinkActive="active">
+          <mat-icon svgIcon="settings" [matTooltip]="'headerComponent.settings' | translate"></mat-icon>
+        </button>
+        <button mat-raised-button (click)="handleLogout()">
+          <mat-icon svgIcon="logout" [matTooltip]="'headerComponent.logout' | translate"></mat-icon>
+        </button>
+      </ng-container>
+      <button *appIsNotLogged mat-raised-button routerLink="/guest/login" routerLinkActive="active">
+        <mat-icon svgIcon="login" [matTooltip]="'shared.login' | translate "></mat-icon>
+      </button>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="end center" fxHide.gt-sm fxFlex>
+    <button [class.active]="trigger.menuOpen" mat-raised-button [matMenuTriggerFor]="menu" #trigger="matMenuTrigger">
+      <mat-icon svgIcon="menu"></mat-icon>
+    </button>
+  </div>
+  <mat-menu class="menu" fxHide.gt-sm #menu>
+    <div fxLayout="column" fxLayoutGap="15px">
+      <ng-container *appIsLogged>
+        <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
+          <button mat-raised-button routerLink="/invoices/history" routerLinkActive="active">
+            <mat-icon svgIcon="history" [matTooltip]="'headerComponent.historyOfInvoices' | translate"></mat-icon>
+          </button>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
+          <button mat-raised-button routerLink="/invoices/new" routerLinkActive="active">
+            <mat-icon svgIcon="add" [matTooltip]="'headerComponent.createInvoice' | translate"></mat-icon>
+          </button>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
+          <button mat-raised-button routerLink="/pomodoro" routerLinkActive="active">
+            <mat-icon svgIcon="clock" matTooltip="Pomodoro"></mat-icon>
+          </button>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
+          <button *appIsAdmin mat-raised-button routerLink="/management" routerLinkActive="active">
+            <mat-icon svgIcon="management" [matTooltip]="'headerComponent.management' | translate"></mat-icon>
+          </button>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
+          <button mat-raised-button routerLink="/settings" routerLinkActive="active">
+            <mat-icon svgIcon="settings" [matTooltip]="'headerComponent.settings' | translate"></mat-icon>
+          </button>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
+          <button mat-raised-button (click)="handleLogout()">
+            <mat-icon svgIcon="logout" [matTooltip]="'headerComponent.logout' | translate"></mat-icon>
+          </button>
+        </div>
+      </ng-container>
+      <div *appIsNotLogged fxLayout="row" fxLayoutAlign="end center" fxFlex>
+        <button mat-raised-button routerLink="/guest/login" routerLinkActive="active">
+          <mat-icon svgIcon="login" [matTooltip]="'shared.login' | translate "></mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-menu>
+</mat-toolbar>
+<select class="floating" [(ngModel)]="currentLanguage" (ngModelChange)="handleLanguageChange()">
+  <option *ngFor="let language of languages" [value]="language">{{ language }}</option>
+</select>

@@ -2,11 +2,9 @@ import { Injectable } from '@angular/core'
 import { MatDialog, MatDialogRef } from '@angular/material/dialog'
 import { TranslateService } from '@ngx-translate/core'
 
-import {
-  SimpleDialogComponent,
-  ConfirmDialogComponent
-} from '@shared/components'
-import { HeaderContent } from '@core/models'
+import { SimpleDialogComponent } from '@shared/components/simple-dialog/simple-dialog.component'
+import { ConfirmDialogComponent } from '@shared/components/confirm-dialog/confirm-dialog.component'
+import { HeaderContent } from '@shared/models'
 
 @Injectable()
 export class DialogService {

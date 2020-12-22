@@ -19,16 +19,26 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { MatMenuModule } from '@angular/material/menu'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { TranslateModule } from '@ngx-translate/core'
+import { EffectsModule } from '@ngrx/effects'
+import { StoreModule } from '@ngrx/store'
 
 import {
   ConfirmDialogComponent,
-  SimpleDialogComponent
+  SimpleDialogComponent,
+  HeaderComponent
 } from '@shared/components'
-import { AuthFacade, SharedFacade } from '@shared/facades'
-import { AuthService, DialogService, SharedService } from '@shared/services'
+import { SharedFacade } from '@shared/facades'
+import { DialogService, SharedService } from '@shared/services'
+import { SharedEffects, SharedReducer, SharedStoreKey } from '@shared/store'
+import { AuthModule } from '@auth/auth.module'
+import { RouterModule } from '@angular/router'
 
 @NgModule({
-  declarations: [SimpleDialogComponent, ConfirmDialogComponent],
+  declarations: [
+    SimpleDialogComponent,
+    ConfirmDialogComponent,
+    HeaderComponent
+  ],
   imports: [
     TranslateModule,
     CommonModule,
@@ -50,7 +60,11 @@ import { AuthService, DialogService, SharedService } from '@shared/services'
     MatCheckboxModule,
     MatSlideToggleModule,
     MatMenuModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    AuthModule,
+    RouterModule,
+    EffectsModule.forFeature([SharedEffects]),
+    StoreModule.forFeature(SharedStoreKey, SharedReducer)
   ],
   exports: [
     FlexLayoutModule,
@@ -73,15 +87,9 @@ import { AuthService, DialogService, SharedService } from '@shared/services'
     MatSlideToggleModule,
     MatMenuModule,
     CommonModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    HeaderComponent
   ],
-  providers: [
-    DatePipe,
-    AuthFacade,
-    SharedService,
-    AuthService,
-    SharedFacade,
-    DialogService
-  ]
+  providers: [DatePipe, SharedService, SharedFacade, DialogService]
 })
 export class SharedModule {}

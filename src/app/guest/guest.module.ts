@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core'
-import { CommonModule } from '@angular/common'
+import { EffectsModule } from '@ngrx/effects'
+import { StoreModule } from '@ngrx/store'
 
 import { GuestRoutingModule } from '@guest/guest-routing.module'
 import {
@@ -11,6 +12,7 @@ import {
 import { GuestFacade } from '@guest/facades'
 import { GuestService } from '@guest/services'
 import { SharedModule } from '@shared/shared.module'
+import { GuestReducer, GuestEffects, GuestStoreKey } from '@guest/store'
 
 @NgModule({
   declarations: [
@@ -19,7 +21,12 @@ import { SharedModule } from '@shared/shared.module'
     RegisterPageComponent,
     ResetPasswordComponent
   ],
-  imports: [CommonModule, GuestRoutingModule, SharedModule],
+  imports: [
+    GuestRoutingModule,
+    SharedModule,
+    EffectsModule.forFeature([GuestEffects]),
+    StoreModule.forFeature(GuestStoreKey, GuestReducer)
+  ],
   providers: [GuestFacade, GuestService]
 })
 export class GuestModule {}

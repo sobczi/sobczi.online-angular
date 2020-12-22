@@ -1,54 +1,31 @@
-import { Injectable, OnDestroy } from '@angular/core'
-import { catchError, tap, takeUntil } from 'rxjs/operators'
-import { Observable, of, Subject } from 'rxjs'
+import { Injectable } from '@angular/core'
+import { Store } from '@ngrx/store'
 
-import { GuestService } from '@guest/services'
-import { User } from '@shared/models'
-import { AuthFacade } from '@shared/facades'
+import { AppState } from '@store/types'
+import {
+  LoginRequest,
+  RegisterUserRequest,
+  ResetPasswordRequest,
+  SendResetPaswordRequest
+} from '@guest/store'
 
 @Injectable()
-export class GuestFacade implements OnDestroy {
-  private readonly unsubscribe$ = new Subject<void>()
-  constructor (
-    private readonly service: GuestService,
-    private readonly authFacade: AuthFacade
-  ) {}
+export class GuestFacade {
+  constructor (private readonly store: Store<AppState>) {}
 
-  ngOnDestroy (): void {
-    this.unsubscribe$.next()
-    this.unsubscribe$.complete()
+  dispatchSendResetPasswordRequest (email: string): void {
+    this.store.dispatch(SendResetPaswordRequest({ email }))
   }
 
-  resetPassword (resetKey: string, newPassword: string): Observable<boolean> {
-    return this.service
-      .resetPassword(resetKey, newPassword)
-      .pipe(takeUntil(this.unsubscribe$))
+  dispatchLoginRequest (email: string, password: string): void {
+    this.store.dispatch(LoginRequest({ email, password }))
   }
 
-  sendResetPassword (email: string): Observable<void> {
-    return this.service
-      .sendResetPassword(email)
-      .pipe(takeUntil(this.unsubscribe$))
+  dispatchRegisterUserRequest (email: string, fullName: string): void {
+    this.store.dispatch(RegisterUserRequest({ email, fullName }))
   }
 
-  login (
-    email: string,
-    password: string
-  ): Observable<{ token: string; user: User } | void> {
-    return this.service.login(email, password).pipe(
-      takeUntil(this.unsubscribe$),
-      tap(response =>
-        typeof response === 'object'
-          ? this.authFacade.dispatchUserLogin(response)
-          : undefined
-      ),
-      catchError(() => of(void 0))
-    )
-  }
-
-  createUser (email: string, fullName: string): Observable<boolean> {
-    return this.service
-      .createUser(email, fullName)
-      .pipe(takeUntil(this.unsubscribe$))
+  dispatchResetPasswordRequest (resetKey: string, newPassword: string): void {
+    this.store.dispatch(ResetPasswordRequest({ resetKey, newPassword }))
   }
 }

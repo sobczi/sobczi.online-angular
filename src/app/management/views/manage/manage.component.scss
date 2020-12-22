@@ -15,6 +15,15 @@ mat-icon:hover {
   text-align: center;
 }
 
+.icon-disabled {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.icon-disabled:hover {
+  transform: none;
+  cursor: unset;
+}
+
 .container {
   margin: 1.5% 5%;
   border-radius: 5px;

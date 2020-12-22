@@ -2,17 +2,32 @@ import { createAction, props } from '@ngrx/store'
 
 import { AccountRoles, User } from '@shared/models'
 
-export const setUsers = createAction(
+// Get users
+export const GetUsers = createAction('[Management Component] Get Users')
+
+export const SetUsers = createAction(
   '[Management Component] Set user',
   props<{ users: User[] }>()
 )
 
-export const updateUser = createAction(
-  '[Management Component] Update user role',
-  props<{ user: User }>()
+// Update user active
+export const UserActiveUpdateRequest = createAction(
+  '[Management Component] Update User Active',
+  props<{ userId: string; active: boolean }>()
 )
 
-export const deleteUser = createAction(
-  '[Management Component] Delete user',
-  props<{ userId: string }>()
+export const UserActiveUpdateResponse = createAction(
+  '[Management Component] User Active Updated',
+  props<{ response: boolean }>()
+)
+
+// Update user role
+export const UserRoleUpdateRequest = createAction(
+  '[Managemenet Component] Update User Role',
+  props<{ userId: string; role: AccountRoles }>()
+)
+
+export const UserRoleUpdateResponse = createAction(
+  '[Managemenet Component] User Role Updated',
+  props<{ response: boolean }>()
 )

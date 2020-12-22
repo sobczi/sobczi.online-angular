@@ -42,8 +42,7 @@
           mat-raised-button
           color="primary"
           class="submit-button"
-          (click)="handleBasicChange()"
-          [disabled]="basicForm.invalid || !basicForm.touched">
+          (click)="handleBasicChange()">
           {{ 'settingsComponent.updateData' | translate }}
         </button>
       </div>
@@ -118,8 +117,7 @@
           mat-raised-button
           color="primary"
           class="submit-button"
-          (click)="handlePasswordChange()"
-          [disabled]="passwordForm.invalid">
+          (click)="handlePasswordChange()">
           {{ 'settingsComponent.updatePassword' | translate }}</button>
       </div>
     </form>

@@ -8,84 +8,60 @@ import { AppState } from '@store/types'
 import { InvoicesService } from '@invoices/services'
 import { Invoice, InvoiceBE } from '@invoices/models'
 import {
-  createInvoice,
-  deleteInvoice,
+  CreateInvoiceRequest,
+  DeleteInvoiceRequest,
+  GetInvoices,
   selectCurrentInvoice,
+  SetCurrentInvoiceId,
   selectInvoices,
-  setInvoices,
-  updateInvoice
+  UpdateInvoiceRequest
 } from '@invoices/store'
 
 @Injectable()
 export class InvoicesFacade implements OnDestroy {
+  readonly accessToken$: Observable<string>
+  readonly currentInvoice$: Observable<InvoiceBE>
+  readonly invoices$: Observable<InvoiceBE[]>
   private readonly unsubscribe$ = new Subject<void>()
   constructor (
     private readonly store: Store<AppState>,
     private readonly service: InvoicesService
-  ) {}
+  ) {
+    this.invoices$ = this.store
+      .select(selectInvoices)
+      .pipe(takeUntil(this.unsubscribe$))
+
+    this.currentInvoice$ = this.store
+      .select(selectCurrentInvoice)
+      .pipe(takeUntil(this.unsubscribe$))
+
+    this.accessToken$ = this.service
+      .accessToken()
+      .pipe(takeUntil(this.unsubscribe$))
+  }
 
   ngOnDestroy (): void {
     this.unsubscribe$.next()
     this.unsubscribe$.complete()
   }
 
-  fetchInvoices (): Observable<InvoiceBE[]> {
-    return this.service.read().pipe(
-      takeUntil(this.unsubscribe$),
-      tap(invoices => this.dispatchFetchedInvoices(invoices))
-    )
+  dispatchCreateInvoiceRequest (invoice: Invoice): void {
+    this.store.dispatch(CreateInvoiceRequest({ invoice }))
   }
 
-  invoices (): Observable<InvoiceBE[]> {
-    return this.store.select(selectInvoices).pipe(takeUntil(this.unsubscribe$))
+  dispatchUpdateInvoiceRequest (invoice: Invoice, invoiceId: string): void {
+    this.store.dispatch(UpdateInvoiceRequest({ invoice, invoiceId }))
   }
 
-  currentInvoice (): Observable<InvoiceBE> {
-    return this.store
-      .select(selectCurrentInvoice)
-      .pipe(takeUntil(this.unsubscribe$))
+  dispatchDeleteInvoiceRequest (invoiceId: string): void {
+    this.store.dispatch(DeleteInvoiceRequest({ invoiceId }))
   }
 
-  create (invoice: Invoice): Observable<InvoiceBE> {
-    return this.service.create(invoice).pipe(
-      takeUntil(this.unsubscribe$),
-      tap(response => this.dispatchCreatedInvoice(response))
-    )
+  dispatchSetCurrentInvoiceId (invoiceId: string): void {
+    this.store.dispatch(SetCurrentInvoiceId({ invoiceId }))
   }
 
-  update (invoice: Invoice, invoiceId: string): Observable<InvoiceBE> {
-    return this.service.update(invoice, invoiceId).pipe(
-      takeUntil(this.unsubscribe$),
-      tap(response => this.dispatchUpdatedInvoice(response))
-    )
-  }
-
-  delete (invoiceId: string): Observable<boolean> {
-    return this.service.delete(invoiceId).pipe(
-      takeUntil(this.unsubscribe$),
-      tap(response =>
-        response ? this.dispatchDeletedInvoice(invoiceId) : undefined
-      )
-    )
-  }
-
-  accessToken (): Observable<string> {
-    return this.service.accessToken().pipe(takeUntil(this.unsubscribe$))
-  }
-
-  private dispatchFetchedInvoices (invoices: InvoiceBE[]): void {
-    this.store.dispatch(setInvoices({ invoices }))
-  }
-
-  private dispatchCreatedInvoice (invoice: InvoiceBE): void {
-    this.store.dispatch(createInvoice({ invoice }))
-  }
-
-  private dispatchDeletedInvoice (invoiceId: string): void {
-    this.store.dispatch(deleteInvoice({ invoiceId }))
-  }
-
-  private dispatchUpdatedInvoice (invoice: InvoiceBE): void {
-    this.store.dispatch(updateInvoice({ invoice }))
+  dispatchGetInvoices (): void {
+    this.store.dispatch(GetInvoices())
   }
 }

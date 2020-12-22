@@ -21,7 +21,8 @@
     "User": "User",
     "Admin": "Admin",
     "DemoUser": "Demo user",
-    "registration": "Registration"
+    "registration": "Registration",
+    "somethingWentWrong": "Something went wrong. Try again later."
   },
   "cv": {
     "at": "at",
@@ -68,6 +69,10 @@
     "registrationInfo": "If request will be accepted you will get on provided email disposable password."
   },
   "historyComponent": {
+    "deleteModal": {
+      "header": "Invoice deletion",
+      "content": "Are you sure that you want to delete invoice?"
+    },
     "header": "HISTORY OF INVOICES",
     "searchInvoice": "Search invoices",
     "dateFrom": "Date from",
@@ -83,6 +88,8 @@
     "downloadMultipleElements": "Download multiple elements"
   },
   "invoiceComponent": {
+    "invoiceCreated": "Successfully created invoice.",
+    "invoiceUpdated": "Successfully updated invoice.",
     "transfer": "Transfer",
     "addPosition": "Add item",
     "orderNumber": "Invoice number/name",
@@ -142,7 +149,11 @@
     "resetPassword": "Password change",
     "changePassword": "Change password",
     "cannotChange": "Cannot change password",
-    "inproperURL": "Seems like password reset key has expired."
+    "inproperURL": "Seems like password reset key has expired.",
+    "passwordChanged": {
+      "header": "Password changed",
+      "content": "Your password was changed successfully."
+    }
   },
   "forgotComponent": {
     "passwordRecover": "Password recovery",
@@ -155,14 +166,19 @@
     "updatePassword": "Update password",
     "basicData": "BASIC DATA",
     "role": "Permissions",
-    "updateDataFailed": "Basic data update failed",
     "dataUpdateSuccessfuly": {
       "header": "Basic data update successful",
       "content": "Your data was successfuly updated."
     },
+    "dataUpdateFailed": {
+      "header": "Basic data update failed"
+    },
     "passwordUpdateSuccessfuly": {
       "header": "Password update successful",
       "content": "Your password was updated."
+    },
+    "passwordNotUpdated": {
+      "header": "Password update failed"
     },
     "accountDeletion": {
       "header": "Account deletion",

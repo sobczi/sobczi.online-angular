@@ -1,4 +1,4 @@
-import { Action, createReducer, on, State } from '@ngrx/store'
+import { Action, createReducer, on } from '@ngrx/store'
 
 import { InvoiceStore } from './types'
 import * as InvoiceActions from './invoice.actions'
@@ -8,36 +8,36 @@ const initialState: InvoiceStore = {
   currentInvoiceId: undefined
 }
 
-const _invoiceReducer = createReducer(
+const invoicesReducer = createReducer(
   initialState,
-  on(InvoiceActions.setInvoices, (state, { invoices }) => ({
+  on(InvoiceActions.SetInvoices, (state, { invoices }) => ({
     ...state,
     invoices
   })),
-  on(InvoiceActions.deleteInvoice, (state, { invoiceId }) => ({
+  on(InvoiceActions.DeleteInvoiceResponse, (state, { invoiceId }) => ({
     ...state,
     invoices: state.invoices?.filter(({ id }) => id !== invoiceId)
   })),
-  on(InvoiceActions.currentInvoiceId, (state, { invoiceId }) => ({
+  on(InvoiceActions.SetCurrentInvoiceId, (state, { invoiceId }) => ({
     ...state,
     currentInvoiceId: invoiceId
   })),
-  on(InvoiceActions.updateInvoice, (state, { invoice }) => ({
+  on(InvoiceActions.UpdateInvoiceResponse, (state, { invoice }) => ({
     ...state,
     invoices: [
       ...state.invoices?.filter(({ id }) => id !== invoice.id),
       invoice
     ]
   })),
-  on(InvoiceActions.createInvoice, (state, { invoice }) => ({
+  on(InvoiceActions.CreateInvoiceResponse, (state, { invoice }) => ({
     ...state,
     invoices: state.invoices ? [...state.invoices, invoice] : [invoice]
   }))
 )
 
-export function invoiceReducer (
-  state: State<InvoiceStore>,
+export function InvoicesReducer (
+  state: InvoiceStore,
   action: Action
-): {} {
-  return _invoiceReducer(state as any, action)
+): InvoiceStore {
+  return invoicesReducer(state, action)
 }

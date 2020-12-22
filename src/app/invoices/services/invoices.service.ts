@@ -6,7 +6,7 @@ import { catchError, map } from 'rxjs/operators'
 import { Invoice, InvoiceBE } from '@invoices/models'
 import { CrudService } from '@invoices/models'
 import { environment } from '@env/environment'
-import { AuthFacade } from '@shared/facades'
+import { AuthFacade } from '@auth/facades'
 
 @Injectable()
 export class InvoicesService implements CrudService<Invoice>, OnDestroy {

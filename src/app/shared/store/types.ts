@@ -1,6 +1,3 @@
-import { User } from '@shared/models'
+export type SharedStore = {}
 
-export type AuthStore = {
-  user: User
-  token: string
-}
+export const SharedStoreKey = 'SharedStoreKey'

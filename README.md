@@ -1,23 +1,27 @@
-## :trollface: [sobczi.online](https://sobczi.online)
-Repository of the frontend work.
+# SobcziCv
 
-Beside of hosting my CV also I'm using this app to create and manage my invoices, pomodoro (WIP) and basic management of users.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.0.
 
-## :hammer: TODO's
-- :alarm_clock: Pomodoro app full integration with FE && BE with :bell: push notifications,
-- :boom: Removing current functionality of registering accounts and activating them as demo users. Instead allow easy switching to demo user app preview with mock interceptors,
-- :unlock: publish backend repository,
-- :email: Sending backup of invoices; guarding them with private keys,
-- :notebook: Preview of invoices,
-- :dollar: Payment of invoices, marking particural invoices as already paid,
-- :email: Email confirmation for new accounts,
-- :question: Switching to monorepo and sharing DTO's,
-- :computer: Frontend in :heavy_check_mark: Angular && :heavy_multiplication_x: Vue && :heavy_multiplication_x: React - easy switching between frameworks.
+## Development server
 
-## :penguin: Tools
-- [Angular](https://github.com/angular),
-- [Material](https://github.com/angular/components),
-- [FlexLayout](https://github.com/angular/flex-layout),
-- [Ngrx](https://github.com/ngrx),
-- [Rxjs](https://github.com/ReactiveX/rxjs),
-- [Ngx-translate](https://github.com/ngx-translate/core).
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+## Code scaffolding
+
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+## Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

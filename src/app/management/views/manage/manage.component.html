@@ -55,7 +55,7 @@
     </div>
     <div fxLayout="column">
       <div
-        *ngFor="let user of users; let idx = index"
+        *ngFor="let user of users$ | async; let idx = index"
         class="table-row"
         fxLayout.gt-sm="row"
         fxLayout.lt-md="column"
@@ -89,7 +89,8 @@
           <mat-slide-toggle
             color="primary"
             [checked]="user.active"
-            (change)="handleActiveChange(user);"
+            (change)="handleActiveChange(user)"
+            [disabled]="user.id === userId"
           ></mat-slide-toggle>
         </div>
         <div
@@ -98,7 +99,8 @@
           fxFlex>
           <mat-select
             [value]="user.role"
-            (valueChange)="handleRoleChange(user, $event)">
+            (valueChange)="handleRoleChange(user, $event)"
+            [disabled]="user.id === userId">
             <mat-option
               *ngFor="let privilage of privilages"
               [value]="privilage">{{ 'shared.' + privilage | translate }}</mat-option>
@@ -108,8 +110,10 @@
           fxLayout="column"
           fxLayoutAlign="center center"
           fxFlex>
-          <mat-icon svgIcon="delete"
-            [matTooltip]="'shared.delete' | translate"
+          <mat-icon
+            svgIcon="delete"
+            [class.icon-disabled]="user.id === userId"
+            [matTooltip]="user.id !== userId ? ('shared.delete' | translate) : ''"
             (click)="handleDelete(user)"></mat-icon>
         </div>
     </div>

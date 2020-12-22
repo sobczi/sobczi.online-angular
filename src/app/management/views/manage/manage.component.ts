@@ -1,13 +1,13 @@
 import { Component, OnDestroy } from '@angular/core'
 import { TranslateService } from '@ngx-translate/core'
-import { filter, take, takeUntil, tap } from 'rxjs/operators'
-import { ReplaySubject } from 'rxjs'
+import { filter, takeUntil, tap } from 'rxjs/operators'
+import { Observable, ReplaySubject } from 'rxjs'
 
 import { ManagementFacade } from '@management/facades'
-import { MOCKED_USERS } from '@management/mock/MOCKED_USERS'
 import { DialogService } from '@shared/services'
 import { AccountRoles, User } from '@shared/models'
-import { AuthFacade, SharedFacade } from '@shared/facades'
+import { SharedFacade } from '@shared/facades'
+import { AuthFacade } from '@auth/facades'
 
 @Component({
   selector: 'app-manage',
@@ -15,17 +15,14 @@ import { AuthFacade, SharedFacade } from '@shared/facades'
   styleUrls: ['./manage.component.scss']
 })
 export class ManageComponent implements OnDestroy {
-  users: User[] = []
-
-  readonly privilages: AccountRoles[] = Object.values(AccountRoles)
+  readonly users$: Observable<User[]>
+  readonly privilages = Object.values(AccountRoles)
 
   private readonly unsubscribe$ = new ReplaySubject<void>()
-  private readonly translate: (
-    value: string
-  ) => string = this.translateService.instant.bind(this.translateService)
-  private readonly haveAccess =
-    this.authFacade.user?.role === AccountRoles.Admin
-  private readonly mockedUsers: User[] = MOCKED_USERS
+
+  get userId (): string {
+    return this.authFacade.user.id
+  }
 
   constructor (
     private readonly dialogService: DialogService,
@@ -34,20 +31,11 @@ export class ManageComponent implements OnDestroy {
     private readonly authFacade: AuthFacade,
     private readonly sharedFacade: SharedFacade
   ) {
-    if (!this.haveAccess) {
-      this.users = this.mockedUsers
-      return
-    }
-    this.facade
-      .users()
-      .pipe(
-        takeUntil(this.unsubscribe$),
-        tap(users =>
-          !users ? this.facade.fetchUsers().subscribe() : undefined
-        ),
-        filter(users => !!users)
-      )
-      .subscribe(users => (this.users = users))
+    this.users$ = this.facade.users$.pipe(
+      takeUntil(this.unsubscribe$),
+      tap(r => (!r ? this.facade.dispatchGetUsers() : undefined)),
+      filter(r => !!r)
+    )
   }
 
   ngOnDestroy (): void {
@@ -56,43 +44,28 @@ export class ManageComponent implements OnDestroy {
   }
 
   handleRoleChange (user: User, $event: AccountRoles): void {
-    if (!this.haveAccess) {
-      return
-    }
-
-    this.facade
-      .updateUserRole(user, $event)
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe()
+    this.facade.dispatchUpdateUserRole(user.id, $event)
   }
 
   handleActiveChange (user: User): void {
-    if (!this.haveAccess) {
-      return
-    }
-
-    this.facade
-      .updateUserActive(user, !user.active)
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe()
+    this.facade.dispatchUpdateUserActive(user.id, !user.active)
   }
 
   handleDelete (user: User): void {
+    if (user.id === this.userId) {
+      return
+    }
+
     this.dialogService
       .openConfirmDialog(
-        this.translate('manageComponent.deleteUser.header'),
-        this.translate('manageComponent.deleteUser.content')
+        this.translateService.instant('manageComponent.deleteUser.header'),
+        this.translateService.instant('manageComponent.deleteUser.content')
       )
       .afterClosed()
       .pipe(
         takeUntil(this.unsubscribe$),
         filter(response => !!response?.accepted)
       )
-      .subscribe(() =>
-        this.sharedFacade
-          .deleteUser(user.id)
-          .pipe(takeUntil(this.unsubscribe$))
-          .subscribe(() => this.facade.dispatchDeleteUser(user.id))
-      )
+      .subscribe(() => this.sharedFacade.dispatchDeleteUserRequest(user.id))
   }
 }

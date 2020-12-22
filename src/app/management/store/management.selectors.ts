@@ -1,7 +1,12 @@
-import { createSelector } from '@ngrx/store'
+import { createFeatureSelector, createSelector } from '@ngrx/store'
 
-import { AppState } from '@store/types'
+import { ManagementStore, ManagementStoreKey } from './types'
 
-const _selectUsers = (state: AppState) => state.management
+export const selectManagementFeature = createFeatureSelector<ManagementStore>(
+  ManagementStoreKey
+)
 
-export const selectUsers = createSelector(_selectUsers, state => state.users)
+export const SelectUsers = createSelector(
+  selectManagementFeature,
+  state => state.users
+)

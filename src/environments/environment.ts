@@ -35,7 +35,7 @@ export const environment = {
   checkUsernameAndEmail: `/api/account/check-username-and-email`,
   sendResetPassword: `/api/account/send-reset-password`,
   changePassword: (userId: string) => `/api/account/change-password/${userId}`,
-  createUser: '/api/account/create-user',
+  registerUser: '/api/account/create-user',
   getUsers: '/api/account/users'
 }
 

@@ -6,10 +6,6 @@
       <span>{{ 'invoiceComponent.editInvoice' | translate }}</span>
     </ng-template>
   </div>
-  <div *ngIf="isDemoUserAndNewMode" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px" fxFlex>
-    <button mat-raised-button class="submit-button" (click)="handleFillWithMockup()">{{ 'invoiceComponent.newMockup' | translate }}</button>
-    <span class="does-not-matter">{{ 'invoiceComponent.exampleDisclaimer' | translate }}</span>
-  </div>
   <form [formGroup]="base">
     <fieldset>
       <legend>{{ 'invoiceComponent.document' | translate }}</legend>

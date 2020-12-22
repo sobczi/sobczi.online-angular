@@ -3,10 +3,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { TranslateService } from '@ngx-translate/core'
 import { takeUntil } from 'rxjs/operators'
 import { ReplaySubject } from 'rxjs'
+import { Actions, ofType } from '@ngrx/effects'
 
 import { DialogService } from '@shared/services'
 import { EmailPattern } from '@shared/validators'
 import { GuestFacade } from '@guest/facades'
+import { SendResetPasswordResponse } from '@guest/store'
 
 @Component({
   selector: 'app-forgot-password',
@@ -24,11 +26,16 @@ export class ForgotPasswordComponent implements OnDestroy {
     private readonly dialogService: DialogService,
     private readonly translateService: TranslateService,
     private readonly facade: GuestFacade,
+    private readonly actions$: Actions,
     formBuilder: FormBuilder
   ) {
     this.form = formBuilder.group({
       email: ['', [Validators.required, Validators.pattern(EmailPattern)]]
     })
+
+    this.actions$
+      .pipe(ofType(SendResetPasswordResponse), takeUntil(this.unsubscribe$))
+      .subscribe(() => this.handleSendResetPasswordResponse())
   }
 
   ngOnDestroy (): void {
@@ -36,17 +43,17 @@ export class ForgotPasswordComponent implements OnDestroy {
     this.unsubscribe$.complete()
   }
 
-  handlePasswordChangeRequest (): void {
+  handleSendPasswordChangeRequest (): void {
     const { email: e } = this.form.controls
     const email = e.value
+    this.facade.dispatchSendResetPasswordRequest(email)
+  }
+
+  private handleSendResetPasswordResponse (): void {
     this.dialogService.openSimpleDialog(
       this.translate('forgotComponent.passwordRecover'),
       this.translate('forgotComponent.ifExistsWasSent')
     )
     this.form.patchValue({ email: '' })
-    this.facade
-      .sendResetPassword(email)
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe()
   }
 }

@@ -1,6 +1,8 @@
-import { Action, createReducer, on, State } from '@ngrx/store'
+import { Action, createReducer, on } from '@ngrx/store'
 
 import { ManagementStore } from '@management/store'
+import * as AccountActions from '@account/store/account.actions'
+import * as SharedActions from '@shared/store'
 import * as ManagementActions from './management.actions'
 
 const initialState: ManagementStore = {
@@ -9,23 +11,34 @@ const initialState: ManagementStore = {
 
 const _managementReducer = createReducer(
   initialState,
-  on(ManagementActions.setUsers, (state, { users }) => ({
+  on(ManagementActions.SetUsers, (state, { users }) => ({
     ...state,
     users
   })),
-  on(ManagementActions.deleteUser, (state, { userId }) => ({
+  on(SharedActions.DeleteUserResponse, (state, { userId }) => ({
     ...state,
     users: state.users.filter(u => u.id !== userId)
   })),
-  on(ManagementActions.updateUser, (state, { user }) => ({
-    ...state,
-    users: [...state.users.filter(u => u.id !== user.id), user]
-  }))
+  on(AccountActions.UserUpdateResponse, (state, { args }) => {
+    const idx = state.users?.findIndex(u => u.id === args.userId)
+    if (!state.users || idx === -1) {
+      return state
+    }
+
+    const updatedUser = { ...state.users[idx], ...args }
+    const users = state.users.filter(u => u.id !== args.userId)
+    users.splice(idx, 0, updatedUser)
+
+    return {
+      ...state,
+      users
+    }
+  })
 )
 
-export function managementReducer (
-  state: State<ManagementStore>,
+export function ManagementReducer (
+  state: ManagementStore,
   action: Action
-): {} {
-  return _managementReducer(state as any, action)
+): ManagementStore {
+  return _managementReducer(state, action)
 }
