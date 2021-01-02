@@ -22,7 +22,6 @@ export class IsAdminDirective implements OnDestroy {
     authFacade: AuthFacade
   ) {
     authFacade.user$.pipe(takeUntil(this.unsubscribe$)).subscribe(user => {
-      console.log(user.role)
       if (user && AccountRoles.Admin === user.role && !this.lastLogged) {
         viewContainer.createEmbeddedView(templateRef)
       } else if (!user) {
