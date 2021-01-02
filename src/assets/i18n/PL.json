@@ -62,7 +62,8 @@
     "client": "Klient",
     "edit": "Edytuj",
     "download": "Pobierz",
-    "downloadMultipleElements": "Pobierz wiele elementów"
+    "downloadMultipleElements": "Pobierz wiele elementów",
+    "preview": "Podgląd"
   },
   "headerComponent": {
     "historyOfInvoices": "Historia faktur",

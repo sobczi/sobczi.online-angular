@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common'
 import { Component, OnDestroy } from '@angular/core'
 import { TranslateService } from '@ngx-translate/core'
 import {
@@ -6,19 +7,15 @@ import {
   MAT_DATE_LOCALE
 } from '@angular/material/core'
 import { Router } from '@angular/router'
-import { Store } from '@ngrx/store'
 import { Actions, ofType } from '@ngrx/effects'
 import { filter, takeUntil, tap } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
-import { environment } from '@env/environment'
-import { AppState } from '@store/types'
 import { CustomDateAdapter, MY_DATE_FORMATS } from '@shared/adapters'
 import { DialogService } from '@shared/services'
 import { InvoiceBE, Item } from '@invoices/models'
 import { DeleteInvoiceResponse } from '@invoices/store'
 import { InvoicesFacade } from '@invoices/facades'
-import { AuthFacade } from '@auth/facades'
 
 @Component({
   selector: 'app-history',
@@ -40,18 +37,13 @@ export class HistoryComponent implements OnDestroy {
   private invoicesIdsToDownload: string[] = []
   private readonly unsubscribe$ = new Subject<void>()
 
-  private get userId (): string {
-    return this.authFacade.user?.id
-  }
-
   constructor (
-    private readonly store: Store<AppState>,
     private readonly dialogSerivce: DialogService,
     private readonly router: Router,
     private readonly translateService: TranslateService,
-    private readonly authFacade: AuthFacade,
     private readonly facade: InvoicesFacade,
-    private readonly actions$: Actions
+    private readonly actions$: Actions,
+    private readonly dp: DatePipe
   ) {
     this.facade.dispatchGetInvoices()
     this.facade.invoices$
@@ -109,26 +101,25 @@ export class HistoryComponent implements OnDestroy {
     this.router.navigate(['/invoices/edit'])
   }
 
+  handlePreview (id: string): void {
+    this.facade.dispatchPreviewInvoice(id)
+  }
+
   handleDownload (id: string): void {
-    const lang = this.translateService.currentLang
-    const userId = this.userId
-    this.facade.accessToken$.subscribe(token =>
-      window.open(environment.getInvoicePdf(lang, userId, token, id), 'blank')
-    )
+    const {
+      base: { type, number: n }
+    } = this.invoices.find(i => i.id === id)
+    this.facade.dispatchDownloadInvoice(id, `${type} ${n}.pdf`)
   }
 
   handleDownloadMultiple (): void {
     if (!this.invoicesIdsToDownload.length) {
       return
     }
-    const lang = this.translateService.currentLang
-    const query = this.invoicesIdsToDownload.join('|')
-    const userId = this.userId
-    this.facade.accessToken$.subscribe(token =>
-      window.open(
-        environment.getInvoicesPdfs(lang, userId, token, query),
-        'blank'
-      )
+
+    this.facade.dispatchDownloadInvoicesRequest(
+      this.invoicesIdsToDownload.join('|'),
+      `pdfs ${this.dp.transform(new Date(), 'dd-MM-yyyy HH_mm')}.zip`
     )
   }
 

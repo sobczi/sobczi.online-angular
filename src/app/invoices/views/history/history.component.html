@@ -66,6 +66,7 @@
     <div fxLayout="column" fxLayoutAlign="center center">
       <div class="icons-row" fxLayout="row" fxLayoutGap="15px" fxFlex>
         <div fxLayout="column" fxLayoutAlign="center center">{{ 'historyComponent.edit' | translate }}</div>
+        <div fxLayout="column" fxLayoutAlign="center center">{{ 'historyComponent.preview' | translate }}</div>
         <div fxLayout="column" fxLayoutAlign="center center">{{ 'historyComponent.download' | translate }}</div>
         <div fxLayout="column" fxLayoutAlign="center center">{{ 'shared.delete' | translate }}</div>
       </div>
@@ -120,17 +121,35 @@
         fxLayoutAlign="center center">
         {{ summarizeBrutto(invoice.items) }}
       </div>
-      <div fxLayout="column" fxLayoutAlign="center center" fxFlex style="word-wrap: break-word;">{{ invoice.buyer.name }}</div>
+      <div
+        fxLayout="column"
+        fxLayoutAlign="center center"
+        fxFlex>{{ invoice.buyer.name }}</div>
       <div fxLayout="column" fxLayoutAlign="center center">
         <div class="icons-row" fxLayout="row" fxLayoutGap="15px" fxFlex>
           <div fxLayout="column" fxLayoutAlign="center center">
-            <mat-icon svgIcon="edit" (click)="handleEdit(invoice.id)" matTooltip="Edytuj"></mat-icon>
+            <mat-icon
+              svgIcon="edit"
+              (click)="handleEdit(invoice.id)"
+              [matTooltip]="'historyComponent.edit' | translate"></mat-icon>
           </div>
           <div fxLayout="column" fxLayoutAlign="center center">
-            <mat-icon svgIcon="download" (click)="handleDownload(invoice.id)" matTooltip="Pobierz"></mat-icon>
+            <mat-icon
+              svgIcon="visibility_on"
+              (click)="handlePreview(invoice.id)"
+              [matTooltip]="'historyComponent.preview' | translate"></mat-icon>
           </div>
           <div fxLayout="column" fxLayoutAlign="center center">
-            <mat-icon svgIcon="delete" (click)="handleDelete(invoice.id)" matTooltip="Usuń"></mat-icon>
+            <mat-icon
+              svgIcon="download"
+              (click)="handleDownload(invoice.id)"
+              [matTooltip]="'historyComponent.download' | translate"></mat-icon>
+          </div>
+          <div fxLayout="column" fxLayoutAlign="center center">
+            <mat-icon
+              svgIcon="delete"
+              (click)="handleDelete(invoice.id)"
+              [matTooltip]="'historyComponent.delete' | translate"></mat-icon>
           </div>
         </div>
       </div>

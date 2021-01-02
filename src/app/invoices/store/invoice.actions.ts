@@ -43,3 +43,30 @@ export const SetCurrentInvoiceId = createAction(
   '[Invoice Component] Set Current Invoice Id',
   props<{ invoiceId: string }>()
 )
+
+export const DownloadInvoiceRequest = createAction(
+  '[Invoice Component] Download Invoice Request',
+  props<{ invoiceId: string; name: string }>()
+)
+
+export const DownloadInvoiceResponse = createAction(
+  '[Invoice Component] Download Invoice Response'
+)
+
+export const PreviewInvoiceRequest = createAction(
+  '[Invoice Component] Preview Invoice Request',
+  props<{ invoiceId: string }>()
+)
+
+export const PreviewInvoiceResponse = createAction(
+  '[Invoice Component] Preview Invoice Response'
+)
+
+export const DownloadInvoicesRequest = createAction(
+  '[Invoice Component] Download Invoices Request',
+  props<{ query: string; name: string }>()
+)
+
+export const DownloadInvoicesResponse = createAction(
+  '[Invoice Component] Download Invoices Response'
+)

@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core'
 import { Store } from '@ngrx/store'
-import { takeUntil, tap } from 'rxjs/operators'
+import { takeUntil } from 'rxjs/operators'
 import { Observable, Subject } from 'rxjs'
 
 import { AppState } from '@store/types'
@@ -14,7 +14,10 @@ import {
   selectCurrentInvoice,
   SetCurrentInvoiceId,
   selectInvoices,
-  UpdateInvoiceRequest
+  UpdateInvoiceRequest,
+  DownloadInvoiceRequest,
+  PreviewInvoiceRequest,
+  DownloadInvoicesRequest
 } from '@invoices/store'
 
 @Injectable()
@@ -63,5 +66,17 @@ export class InvoicesFacade implements OnDestroy {
 
   dispatchGetInvoices (): void {
     this.store.dispatch(GetInvoices())
+  }
+
+  dispatchDownloadInvoice (invoiceId: string, name: string): void {
+    this.store.dispatch(DownloadInvoiceRequest({ invoiceId, name }))
+  }
+
+  dispatchPreviewInvoice (invoiceId: string): void {
+    this.store.dispatch(PreviewInvoiceRequest({ invoiceId }))
+  }
+
+  dispatchDownloadInvoicesRequest (query: string, name: string): void {
+    this.store.dispatch(DownloadInvoicesRequest({ query, name }))
   }
 }

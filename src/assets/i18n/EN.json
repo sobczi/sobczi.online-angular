@@ -85,7 +85,8 @@
     "edit": "Edit",
     "download": "Download",
     "notFound": "Invoices not found.",
-    "downloadMultipleElements": "Download multiple elements"
+    "downloadMultipleElements": "Download multiple elements",
+    "preview": "Preview"
   },
   "invoiceComponent": {
     "invoiceCreated": "Successfully created invoice.",
