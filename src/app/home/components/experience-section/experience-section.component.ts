@@ -30,13 +30,18 @@ export class ExperienceSectionComponent {
   readonly sections: EXPAND_SECTIONS[] = [EXPAND_SECTIONS.ISPLMR]
 
   get ISPLMRDuration (): string {
-    const from = new Date('2020-03-01')
+    const from = new Date('2019-03-01')
     const now = new Date()
-    let monthDiff = now.getMonth() - from.getMonth() + 1
-    const yearDiff = monthDiff / 12
+    let monthDiff = (from.getFullYear() - now.getFullYear()) * 12
+    monthDiff -= now.getMonth()
+    monthDiff += from.getMonth()
+    monthDiff = Math.abs(monthDiff)
+
+    const yearDiff = Math.floor(monthDiff / 12)
     if (monthDiff >= 12) {
       monthDiff = monthDiff % 12
     }
+
     const yearString = yearDiff >= 1 ? `${yearDiff}y` : ''
     const monthString = monthDiff ? `${monthDiff}m` : ''
     return `${yearString} ${monthString}`

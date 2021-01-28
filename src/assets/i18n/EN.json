@@ -1,6 +1,6 @@
 {
   "shared": {
-    "delete": "Usuń",
+    "delete": "Delete",
     "invalidEmail": "Seems like provided email is incorrect.",
     "loggedOut": "Logged out",
     "bye": "Bye",
@@ -15,7 +15,7 @@
     "repeatPassword": "Repeat password",
     "passwordsNotEqual": "Passwords are different.",
     "emailOccupied": "Email address is already occupied.",
-    "passwordPattern": "Password should consist of at least 8 characters including at least one number.",
+    "passwordPattern": "Password should consist of at least 8 characters including: at least one number, at least one regular and one capital letter.",
     "backToLogin": "Back to login",
     "privilages": "Privilages",
     "User": "User",

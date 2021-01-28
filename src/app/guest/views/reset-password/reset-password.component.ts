@@ -24,8 +24,8 @@ import {
   styleUrls: ['./reset-password.component.scss']
 })
 export class ResetPasswordComponent {
-  form: FormGroup
   passwordIsVisible: boolean
+  readonly form: FormGroup
   readonly errorStateMatcher = new CrossFieldErrorMatcher()
   private resetKey: string
   private readonly unsubscribe$ = new ReplaySubject<void>()

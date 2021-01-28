@@ -3,7 +3,7 @@ import { createAction, props } from '@ngrx/store'
 import { LoginResponseArgs } from '@guest/models'
 
 export const SendResetPaswordRequest = createAction(
-  '[Guest Component] Reset Password Request',
+  '[Guest Component] Send Reset Password Request',
   props<{ email: string }>()
 )
 
