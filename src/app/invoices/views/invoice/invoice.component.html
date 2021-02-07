@@ -84,9 +84,8 @@
       <div fxLayout.gt-xs="row" fxLayout.lt-sm="column" fxLayoutGap.gt-xs="15px" fxFlex>
         <mat-form-field fxFlex>
           <mat-label>{{ 'invoiceComponent.accountNumber' | translate }}</mat-label>
-          <input matInput formControlName="accountNumber" (keyup)="handleAccountNumberChanges()">
+          <input matInput formControlName="accountNumber">
           <mat-error *ngIf="payment.controls.accountNumber.hasError('required')">{{ 'shared.fieldRequired' | translate }}</mat-error>
-          <mat-error *ngIf="payment.controls.accountNumber.hasError('pattern')">{{ 'invoiceComponent.accountNumber26Digits' | translate }}</mat-error>
         </mat-form-field>
         <mat-form-field fxFlex>
           <mat-label>{{ 'invoiceComponent.paymentType' | translate }}</mat-label>

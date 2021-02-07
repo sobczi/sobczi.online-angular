@@ -144,13 +144,7 @@ export class InvoiceComponent implements AfterViewInit, OnDestroy {
     this.payment = formBuilder.group(
       {
         type: [PaymentType.transfer, Validators.required],
-        accountNumber: [
-          '',
-          [
-            Validators.required,
-            Validators.pattern(/^\d{2} \d{4} \d{4} \d{4} \d{4} \d{4} \d{4}$/)
-          ]
-        ],
+        accountNumber: ['', [Validators.required]],
         sign: [false],
         signValue: [{ value: '', disabled: true }]
       },
@@ -229,19 +223,6 @@ export class InvoiceComponent implements AfterViewInit, OnDestroy {
   handleItemFormDelete (item: Item): void {
     this.items = this.items.filter(itemTmp => itemTmp !== item)
     this.cdref.detectChanges()
-  }
-
-  handleAccountNumberChanges (): void {
-    const value: string = this.payment.controls.accountNumber.value.replace(
-      /\s/g,
-      ''
-    )
-    this.payment.patchValue({
-      accountNumber: `${value.substring(0, 2)} ${value
-        .substr(2)
-        .match(/.{1,4}/g)
-        ?.join(' ') || ''}`
-    })
   }
 
   handleSaveAsNew (): void {

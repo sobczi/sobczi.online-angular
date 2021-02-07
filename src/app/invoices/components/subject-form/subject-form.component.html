@@ -2,9 +2,8 @@
   <div fxLayout.gt-xs="row" fxLayout.lt-sm="column" fxLayoutGap.gt-xs="15px">
     <mat-form-field fxFlex.gt-xs="25">
       <mat-label>{{ 'invoiceComponent.taxId' | translate }}</mat-label>
-      <input matInput formControlName="NIP" (keyup)="formatNIPNumber()">
+      <input matInput formControlName="NIP">
       <mat-error *ngIf="form.controls.NIP.hasError('required')">{{ 'shared.fieldRequired' | translate }}</mat-error>
-      <mat-error *ngIf="form.controls.NIP.hasError('pattern')">{{ 'invoiceComponent.taxIdFormat' | translate }}</mat-error>
     </mat-form-field>
     <mat-form-field fxFlex.gt-xs="75">
       <mat-label>{{ header }}</mat-label>
@@ -21,7 +20,6 @@
       <mat-label>{{ 'invoiceComponent.postalCode' | translate }}</mat-label>
       <input matInput formControlName="postalCode">
       <mat-error *ngIf="form.controls.postalCode.hasError('required')">{{ 'shared.fieldRequired' | translate }}</mat-error>
-      <mat-error *ngIf="form.controls.postalCode.hasError('pattern')">{{ 'invoiceComponent.postalCodeFormat' | translate }}</mat-error>
     </mat-form-field>
     <mat-form-field fxFlex.gt-xs="75">
       <mat-label>{{ 'invoiceComponent.city' | translate }}</mat-label>
