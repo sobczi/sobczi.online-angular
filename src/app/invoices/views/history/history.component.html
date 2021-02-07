@@ -65,10 +65,10 @@
     <div fxLayout="column" fxLayoutAlign="center center" fxFlex>{{ 'historyComponent.client' | translate }}</div>
     <div fxLayout="column" fxLayoutAlign="center center">
       <div class="icons-row" fxLayout="row" fxLayoutGap="15px" fxFlex>
-        <span fxLayout="column" fxLayoutAlign="center center">{{ 'historyComponent.edit' | translate }}</span>
-        <span fxLayout="column" fxLayoutAlign="center center">{{ 'historyComponent.preview' | translate }}</span>
-        <span fxLayout="column" fxLayoutAlign="center center">{{ 'historyComponent.download' | translate }}</span>
-        <span fxLayout="column" fxLayoutAlign="center center">{{ 'shared.delete' | translate }}</span>
+        <div fxLayout="column" fxLayoutAlign="center center">{{ 'historyComponent.edit' | translate }}</div>
+        <div fxLayout="column" fxLayoutAlign="center center">{{ 'historyComponent.preview' | translate }}</div>
+        <div fxLayout="column" fxLayoutAlign="center center">{{ 'historyComponent.download' | translate }}</div>
+        <div fxLayout="column" fxLayoutAlign="center center">{{ 'shared.delete' | translate }}</div>
       </div>
     </div>
   </div>
@@ -82,78 +82,78 @@
       {{ 'historyComponent.notFound' | translate }}
     </div>
     <div *ngIf="visibleInvoices.length" fxLayout="column" fxFlex>
-    <div
-      *ngFor="let invoice of visibleInvoices"
-      class="table-row"
-      fxLayout.gt-sm="row"
-      fxLayout.lt-md="column"
-      fxLayoutGap="15px">
       <div
-        fxLayout.gt-sm="column"
-        fxLayout.lt-md="row"
-        fxFlex.lt-md="100"
-        fxLayoutAlign="center center">
-        <mat-checkbox
-          class="icons-element"
-          color="primary"
-          (change)="handleMultipleChange(invoice.id)"
+        *ngFor="let invoice of visibleInvoices"
+        class="table-row"
+        fxLayout.gt-sm="row"
+        fxLayout.lt-md="column"
+        fxLayoutGap="15px">
+        <div
+          fxLayout.gt-sm="column"
+          fxLayout.lt-md="row"
+          fxFlex.lt-md="100"
+          fxLayoutAlign="center center">
+          <mat-checkbox
+            class="icons-element"
+            color="primary"
+            (change)="handleMultipleChange(invoice.id)"
+            fxLayoutAlign="center center"
+          ></mat-checkbox>
+        </div>
+        <div
+          fxLayout.gt-sm="column"
+          fxFlex.gt-sm="10"
+          fxLayout.lt-md="row"
+          fxLayoutAlign="center center">
+          {{ invoice.base.date | date: 'dd-MM-yyyy' }}
+        </div>
+        <div
+          fxLayout.gt-sm="column"
+          fxFlex.gt-sm="15"
+          fxLayout.lt-md="row"
+          fxLayoutAlign="center center">
+          {{ invoice.base.type }} {{ invoice.base.number }}
+        </div>
+        <div
+          fxLayout.gt-sm="column"
+          fxFlex.gt-sm="10"
+          fxLayout.lt-md="row"
+          fxLayoutAlign="center center">
+          {{ summarizeBrutto(invoice.items) }}
+        </div>
+        <div
+          fxLayout="column"
           fxLayoutAlign="center center"
-        ></mat-checkbox>
-      </div>
-      <div
-        fxLayout.gt-sm="column"
-        fxFlex.gt-sm="10"
-        fxLayout.lt-md="row"
-        fxLayoutAlign="center center">
-        {{ invoice.base.date | date: 'dd-MM-yyyy' }}
-      </div>
-      <div
-        fxLayout.gt-sm="column"
-        fxFlex.gt-sm="15"
-        fxLayout.lt-md="row"
-        fxLayoutAlign="center center">
-        {{ invoice.base.type }} {{ invoice.base.number }}
-      </div>
-      <div
-        fxLayout.gt-sm="column"
-        fxFlex.gt-sm="10"
-        fxLayout.lt-md="row"
-        fxLayoutAlign="center center">
-        {{ summarizeBrutto(invoice.items) }}
-      </div>
-      <div
-        fxLayout="column"
-        fxLayoutAlign="center center"
-        fxFlex>{{ invoice.buyer.name }}</div>
-      <div fxLayout="column" fxLayoutAlign="center center">
-        <div class="icons-row" fxLayout="row" fxLayoutGap="15px" fxFlex>
-          <div fxLayout="column" fxLayoutAlign="center center">
-            <mat-icon
-              svgIcon="edit"
-              (click)="handleEdit(invoice.id)"
-              [matTooltip]="'historyComponent.edit' | translate"></mat-icon>
-          </div>
-          <div fxLayout="column" fxLayoutAlign="center center">
-            <mat-icon
-              svgIcon="visibility_on"
-              (click)="handlePreview(invoice.id)"
-              [matTooltip]="'historyComponent.preview' | translate"></mat-icon>
-          </div>
-          <div fxLayout="column" fxLayoutAlign="center center">
-            <mat-icon
-              svgIcon="download"
-              (click)="handleDownload(invoice.id)"
-              [matTooltip]="'historyComponent.download' | translate"></mat-icon>
-          </div>
-          <div fxLayout="column" fxLayoutAlign="center center">
-            <mat-icon
-              svgIcon="delete"
-              (click)="handleDelete(invoice.id)"
-              [matTooltip]="'historyComponent.delete' | translate"></mat-icon>
+          fxFlex>{{ invoice.buyer.name }}</div>
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <div class="icons-row" fxLayout="row" fxLayoutGap="15px" fxFlex>
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <mat-icon
+                svgIcon="edit"
+                (click)="handleEdit(invoice.id)"
+                [matTooltip]="'historyComponent.edit' | translate"></mat-icon>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <mat-icon
+                svgIcon="visibility_on"
+                (click)="handlePreview(invoice.id)"
+                [matTooltip]="'historyComponent.preview' | translate"></mat-icon>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <mat-icon
+                svgIcon="download"
+                (click)="handleDownload(invoice.id)"
+                [matTooltip]="'historyComponent.download' | translate"></mat-icon>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <mat-icon
+                svgIcon="delete"
+                (click)="handleDelete(invoice.id)"
+                [matTooltip]="'historyComponent.delete' | translate"></mat-icon>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </div>
   </div>
 </div>
