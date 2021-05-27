@@ -44,6 +44,9 @@
       "thirdPart": "ogólnodostępnej stronie",
       "fourthPart": "dla pacjentów, przy której byłem odpowiedzialny za około 75% pracy frontendowej. Zdalna praca w małym zespole."
     },
+    "Alphta": {
+      "description": "Implementowanie złożonych, animowanych widoków RWD przy pomocy frameworka Angular w metodologi SSR. Komunikacja z backendem poprzez JSON:API, zarządzanie stanem aplikacji dzięki Akita Store. Testowanie aplikacji poprzez Cypress. Abstrakcja reużywalnych komponentów do bibliotek. Zdalna praca w małym zespole."
+    },
     "contact": "Kontakt"
   },
   "historyComponent": {

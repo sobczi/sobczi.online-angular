@@ -33,6 +33,10 @@ export const SkillColumns: SkillSection[][] = [
     {
       image: 'eslint.png',
       name: 'ESLint'
+    },
+    {
+      image: 'akita.png',
+      name: 'Akita Store'
     }
   ],
   [
@@ -67,6 +71,10 @@ export const SkillColumns: SkillSection[][] = [
     {
       image: 'mongo.png',
       name: 'MongoDB'
+    },
+    {
+      image: 'cypress.png',
+      name: 'Cypress'
     }
   ],
   [
@@ -85,6 +93,10 @@ export const SkillColumns: SkillSection[][] = [
     {
       image: 'git.png',
       name: 'Git'
+    },
+    {
+      image: 'jsonapi.png',
+      name: 'JSON:API'
     },
     {
       image: 'framework.png',

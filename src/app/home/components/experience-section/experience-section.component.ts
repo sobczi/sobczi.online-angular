@@ -1,10 +1,10 @@
 import { animate, style, transition, trigger } from '@angular/animations'
 import { Component } from '@angular/core'
-
 import { Links } from '../../models'
 
 enum EXPAND_SECTIONS {
-  ISPLMR = 'ISPLMR'
+  ISPLMR = 'ISPLMR',
+  ALPHTA = 'ALPHTA'
 }
 
 @Component({
@@ -26,11 +26,14 @@ enum EXPAND_SECTIONS {
   ]
 })
 export class ExperienceSectionComponent {
-  currentExpanded: EXPAND_SECTIONS = EXPAND_SECTIONS.ISPLMR
-  readonly sections: EXPAND_SECTIONS[] = [EXPAND_SECTIONS.ISPLMR]
+  currentExpanded: EXPAND_SECTIONS = EXPAND_SECTIONS.ALPHTA
+  readonly sections: EXPAND_SECTIONS[] = [
+    EXPAND_SECTIONS.ISPLMR,
+    EXPAND_SECTIONS.ALPHTA
+  ]
 
-  get ISPLMRDuration (): string {
-    const from = new Date('2019-03-01')
+  get alphtaDuration (): string {
+    const from = new Date('2021-01-01')
     const now = new Date()
     let monthDiff = (from.getFullYear() - now.getFullYear()) * 12
     monthDiff -= now.getMonth()
@@ -55,12 +58,17 @@ export class ExperienceSectionComponent {
     window.open(Links.EUROMEDIS)
   }
 
-  handleEclinicClick (): void {
-    window.open(Links.ECLINIC)
+  handleAlphtaClick (): void {
+    window.open(Links.ALPHTA)
   }
 
   handleExpandISPLMR (): void {
     const ISPLMR = EXPAND_SECTIONS.ISPLMR
     this.currentExpanded = this.currentExpanded === ISPLMR ? undefined : ISPLMR
+  }
+
+  handleExpandAlphta (): void {
+    const alphta = EXPAND_SECTIONS.ALPHTA
+    this.currentExpanded = this.currentExpanded === alphta ? undefined : alphta
   }
 }

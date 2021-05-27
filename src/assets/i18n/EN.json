@@ -40,9 +40,12 @@
     "advanced": "Advanced",
     "ISPLMR": {
       "firstPart": "In cooperation with",
-      "secondPart": ", developing web apps in MEAN stack for medical centrum to handle online and offline patients. Managing and creating electronic medical documentation, reservations, schedules, payments. Three applications for patients, doctors and managing. Integrations with external systems via REST API and SOAP. Backend based on microservices writed with Node using TypeScript. Frontend with Angular with abstraction of frequently used elements into libraries. Work of our team is available on a",
+      "secondPart": ", developing web apps in the MEAN stack for medical center to handle online and offline patients. Managing and creating electronic medical documentation, reservations, schedules, payments. Three applications for patients, doctors and managing. Integrations with external systems via REST API and SOAP. Backend based on microservices writed with Node using TypeScript. Frontend with Angular with abstraction of frequently used elements into libraries. Work of our team is available on a",
       "thirdPart": "generally available site",
       "fourthPart": "for patients on which I was responsible for about 75% frontend work. Working remotely in a small team."
+    },
+    "Alphta": {
+      "description": "Implementing complex, animated RWD views using Angular in the SSR methodology. Communication with backend via JSON:API, managing state of the application thanks to Akita Store. Application testing using Cypress. Abstraction of reusable components to libraries. Remote work in a small team."
     },
     "contact": "Contact"
   },
