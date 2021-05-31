@@ -37,6 +37,10 @@ export const SkillColumns: SkillSection[][] = [
     {
       image: 'akita.png',
       name: 'Akita Store'
+    },
+    {
+      image: 'avocode.png',
+      name: 'Avocode'
     }
   ],
   [
@@ -75,6 +79,10 @@ export const SkillColumns: SkillSection[][] = [
     {
       image: 'cypress.png',
       name: 'Cypress'
+    },
+    {
+      image: 'figma.png',
+      name: 'Figma'
     }
   ],
   [
