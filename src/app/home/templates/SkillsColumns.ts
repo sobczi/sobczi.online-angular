@@ -87,6 +87,10 @@ export const SkillColumns: SkillSection[][] = [
   ],
   [
     {
+      image: 'nx-console.png',
+      name: 'Nx Console'
+    },
+    {
       image: 'postman.png',
       name: 'Postman'
     },

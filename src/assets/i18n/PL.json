@@ -40,7 +40,7 @@
     "advanced": "Zaawansowany",
     "ISPLMR": {
       "firstPart": "W kooperacji z",
-      "secondPart": ", tworzenie i rozwijanie aplikacji internetowych w stosie MEAN dla medycznego centrum do obsługi pacjentów online i offline. Zarządzanie oraz tworzenie dokumentacji medycznej, rezerwacji, harmonogramów, płatności. Trzy aplikacje dla pacjentów, lekarzy oraz kadry zarządzającej. Integracje z zewnętrznymi systami poprzez REST API oraz SOAP. Backend oparty o mikroserwisy napisane w Node używając TypeScript. Frontend w Angularze z abstrakcją często używanych elementów do bibliotek. Praca naszego zespołu dostępna jest na",
+      "secondPart": ", tworzenie i rozwijanie aplikacji internetowych w stosie MEAN dla medycznego centrum do obsługi pacjentów online i offline. Zarządzanie oraz tworzenie dokumentacji medycznej, rezerwacji, harmonogramów, płatności. Trzy aplikacje dla pacjentów, lekarzy oraz kadry zarządzającej. Integracje z zewnętrznymi systami poprzez REST API oraz SOAP. Backend oparty o mikroserwisy napisane w Node używając TypeScript. Frontend w Angularze z abstrakcją często używanych elementów do bibliotek. Zdalna praca w małym zespole.",
       "thirdPart": "ogólnodostępnej stronie",
       "fourthPart": "dla pacjentów, przy której byłem odpowiedzialny za około 75% pracy frontendowej. Zdalna praca w małym zespole."
     },
