@@ -24,6 +24,15 @@ $mm: 'montserrat-medium';
 .description {
   font-family: $mm;
   padding-left: 25px;
+  max-height: 0px;
+  opacity: 0;
+  transition: max-height .3s ease-in-out, opacity .3s ease-in-out;
+  overflow: hidden;
+
+  &--active {
+    max-height: 500px;
+    opacity: 1;
+  }
 }
 
 .link {

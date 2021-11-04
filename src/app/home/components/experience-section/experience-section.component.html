@@ -10,25 +10,23 @@
     <div fxLayout="column">
       <div fxLayout="row" fxLayoutGap="5px">
         <span class="position"
-          >Angular Developer {{ 'cv.at' | translate }}
+          >Angular Developer {{ "cv.at" | translate }}
           <span class="link" (click)="handleAlphtaClick()"
             >Alphta Digital Lab</span
           >
         </span>
         <span class="date-ranges">{{ alphtaDuration }}</span>
       </div>
-      <span class="date-ranges">01/2021 - {{ 'cv.now' | translate }}</span>
+      <span class="date-ranges">01/2021 - 10/2021</span>
     </div>
   </div>
   <div
-    *ngIf="currentExpanded === sections[1]"
     class="description"
+    [class.description--active]="currentExpanded === sections[1]"
     fxLayout="row"
-    fxFlex.gt-md="50"
-    [@fadeInOut]
   >
     <div fxFlex.gt-md="50">
-      {{ 'cv.Alphta.description' | translate }}
+      {{ "cv.Alphta.description" | translate }}
     </div>
   </div>
   <div fxLayout="row" fxLayoutGap="5px">
@@ -42,7 +40,7 @@
     <div fxLayout="column">
       <div fxLayout="row" fxLayoutGap="5px">
         <span class="position"
-          >Full Stack Developer {{ 'cv.at' | translate }} ISPLMR</span
+          >Angular && Node Developer {{ "cv.at" | translate }} ISPLMR</span
         >
         <span class="date-ranges">1y</span>
       </div>
@@ -50,17 +48,15 @@
     </div>
   </div>
   <div
-    *ngIf="currentExpanded === sections[0]"
     class="description"
+    [class.description--active]="currentExpanded === sections[0]"
     fxLayout="row"
-    fxFlex.gt-md="50"
-    [@fadeInOut]
   >
     <div fxFlex.gt-md="50">
-      {{ 'cv.ISPLMR.firstPart' | translate }}
+      {{ "cv.ISPLMR.firstPart" | translate }}
       <span class="pointer link" (click)="handleEuroMedisClick()"
         >EuroMedis</span
-      >{{ 'cv.ISPLMR.secondPart' | translate }}
+      >{{ "cv.ISPLMR.secondPart" | translate }}
     </div>
   </div>
 </div>

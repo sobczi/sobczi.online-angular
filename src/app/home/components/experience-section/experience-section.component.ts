@@ -1,4 +1,3 @@
-import { animate, style, transition, trigger } from '@angular/animations'
 import { Component } from '@angular/core'
 import { Links } from '../../models'
 
@@ -11,19 +10,6 @@ enum EXPAND_SECTIONS {
   selector: 'app-experience-section',
   templateUrl: './experience-section.component.html',
   styleUrls: ['./experience-section.component.scss'],
-  animations: [
-    trigger('fadeInOut', [
-      transition(':enter', [
-        // :enter is alias to 'void => *'
-        style({ opacity: 0 }),
-        animate(500, style({ opacity: 1 }))
-      ]),
-      transition(':leave', [
-        // :leave is alias to '* => void'
-        animate(500, style({ opacity: 0 }))
-      ])
-    ])
-  ]
 })
 export class ExperienceSectionComponent {
   currentExpanded: EXPAND_SECTIONS = EXPAND_SECTIONS.ALPHTA
