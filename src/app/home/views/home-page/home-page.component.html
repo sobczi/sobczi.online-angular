@@ -1,23 +1,221 @@
-<div class="container" fxLayout.gt-sm="row" fxLayout.lt-md="column">
-  <div fxLayout.gt-sm="column" fxLayout.lt-md="row" fxLayoutGap="25px">
-    <app-side-panel fxFlex></app-side-panel>
-  </div>
-  <div class="content" fxLayout="column" fxLayoutGap="50px" fxFlex>
-    <div fxLayout="column" fxLayoutGap="25px" fxFlex>
-      <app-section-header [section]="educationSection"></app-section-header>
-      <app-education-section></app-education-section>
-    </div>
-    <div fxLayout="column" fxLayoutGap="25px" fxFlex>
-      <app-section-header [section]="experienceSection"></app-section-header>
-      <app-experience-section></app-experience-section>
-    </div>
-    <div fxLayout="column" fxLayoutGap="25px" fxFlex>
-      <app-section-header [section]="skillsSection"></app-section-header>
-      <app-skills-section [columns]="skillsColumns"></app-skills-section>
-    </div>
-    <div fxLayout="column" fxLayoutGap="25px" fxFlex>
-      <app-section-header [section]="languageSection"></app-section-header>
-      <app-languages-section [rows]="languagesRows"></app-languages-section>
-    </div>
-  </div>
+<div class="home-page">
+	<!-- Header -->
+	<div class="home-page--header">
+		<div class="home-page--header--name">
+			<div class="home-page--header--name--prefix">
+				<span> D </span>
+			</div>
+			<div>
+				<span class="home-page--header--name--fname">Daniel</span> Sobczak
+			</div>
+		</div>
+		<div class="home-page--header--contact">
+			<!-- Contact -->
+			<div
+				class="home-page--header--contact--section"
+				[class.home-page--header--contact--section--tick]="showTickPhone"
+				(click)="copyPhone()"
+			>
+				<mat-icon svgIcon="phone"></mat-icon>
+				<span>Copy</span>
+				<mat-icon svgIcon="tick" class="tick"></mat-icon>
+			</div>
+			<div
+				class="home-page--header--contact--section"
+				[class.home-page--header--contact--section--tick]="showTickEmail"
+				(click)="copyEmail()"
+			>
+				<mat-icon svgIcon="email"></mat-icon>
+				<span>Copy</span>
+				<mat-icon svgIcon="tick" class="tick"></mat-icon>
+			</div>
+		</div>
+	</div>
+
+	<!-- Intro -->
+	<div class="home-page--intro">
+		<div class="home-page--intro--photo">
+			<img src="/assets/images/photo.jpeg" />
+		</div>
+		<div class="home-page--intro--brief">
+			<div class="home-page--intro--brief--position">Frontend Developer</div>
+			<div class="home-page--intro--brief--name">Daniel Sobczak</div>
+			<div class="home-page--intro--brief--desc">
+				Frontend developer with
+				<span>over 3 years of commercial experience.</span>
+				<br />
+				Mainly focused on <span>Angular</span> framework but happy to learn new
+				technologies.
+				<br />
+				Additionally has 1 year of commercial experience working with
+				<span>Node.js</span>.
+				<br />
+				Deeply interested in coding frontend - as a hobby learns
+				<span>React</span> & <span>Vue</span>.
+			</div>
+			<div class="home-page--intro--brief--buttons">
+				<button mat-stroked-button (click)="downloadCv()">Download CV</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- What I do -->
+	<div class="home-page--section">
+		<span class="home-page--section--header">What I Do</span>
+		<!-- Coding -->
+		<div class="home-page--section--content">
+			<div class="home-page--section--content--description--wrapper">
+				<mat-icon svgIcon="keyboard"></mat-icon>
+				<div class="home-page--section--content--description">
+					<span class="home-page--section--content--description--header"
+						>Coding</span
+					>
+					On the daily basis developing Angular apps mostly based on the newests
+					versions of framework sticking to the best practices. Passionate about
+					high quality of code.
+				</div>
+			</div>
+			<!-- Design -->
+			<div class="home-page--section--content--description--wrapper">
+				<mat-icon svgIcon="rwd"></mat-icon>
+				<div class="home-page--section--content--description">
+					<span class="home-page--section--content--description--header"
+						>Design</span
+					>
+					Happy to deliver good looking apps according to proposed design. Being
+					pedant in this manner is my strong side. Pixel perfect result with
+					support for all devices.
+				</div>
+			</div>
+			<!-- Team -->
+			<div class="home-page--section--content--description--wrapper">
+				<mat-icon svgIcon="team"></mat-icon>
+				<div class="home-page--section--content--description">
+					<span class="home-page--section--content--description--header"
+						>Collaborative & responsible</span
+					>
+					Working with can-do attitude. Highly appreciate environments where
+					everyone is one-man-army and can meet specified requirements of
+					deadlines and quality.
+				</div>
+			</div>
+			<!-- Architecture -->
+			<div class="home-page--section--content--description--wrapper">
+				<mat-icon svgIcon="arch"></mat-icon>
+				<div class="home-page--section--content--description">
+					<span class="home-page--section--content--description--header"
+						>Architecture</span
+					>
+					Looking at projects from high scope. Planning apps to be easy to
+					extend & maintain in the future. Implementing new tools provided by
+					framework to keep app up-to-date as many as can.
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Commercial experience -->
+	<div class="home-page--section">
+		<span class="home-page--section--header">Commercial Experience</span>
+		<!-- Trimetis -->
+		<div class="home-page--section--experience">
+			<div class="home-page--section--experience--header">
+				<span class="home-page--section--experience--dates"
+					>12/2022 - Current</span
+				>
+				<span class="home-page--section--experience--place"
+					>Trimetis Services Sp. z o.o.</span
+				>
+			</div>
+			<div class="home-page--section--experience--position">
+				Angular Developer
+			</div>
+			<div class="home-page--section--experience--desc">
+				Creating app on the newest versions of Angular. Implementing new
+				features which provides financial tools for an company. Store management
+				with Ngxs, ngZorro for designs. Remote work in international team.
+			</div>
+		</div>
+		<!-- Avenga -->
+		<div class="home-page--section--experience">
+			<div class="home-page--section--experience--header">
+				<span class="home-page--section--experience--dates"
+					>12/2021 - 12/2022</span
+				>
+				<span class="home-page--section--experience--place">Avenga</span>
+			</div>
+			<div class="home-page--section--experience--position">
+				Lead Angular Developer
+			</div>
+			<div class="home-page--section--experience--desc">
+				Implementation of a web applications for the medical sector using
+				Angular framework. Taking care of the quality of the produced code,
+				architecture and optimization of the application. Communication with
+				backend based on Swagger, entity management in application using Ngrx
+				Entity. Remote work in an international team.
+			</div>
+		</div>
+		<!-- OPI -->
+		<div class="home-page--section--experience">
+			<div class="home-page--section--experience--header">
+				<span class="home-page--section--experience--dates"
+					>07/2021 - 11/2022</span
+				>
+				<span class="home-page--section--experience--place"
+					>National Information Processing Institute</span
+				>
+			</div>
+			<div class="home-page--section--experience--position">
+				Angular Developer
+			</div>
+			<div class="home-page--section--experience--desc">
+				Implementation of web applications for the education sector using
+				Angular framework. Communicating with the backend on the development
+				environment using OpenAPI. Covering the frontend through e2e tests using
+				Cypress. Taking care of code quality through eslint, prettier, stylelint
+				and internal packages.
+			</div>
+		</div>
+		<!-- Alphta -->
+		<div class="home-page--section--experience">
+			<div class="home-page--section--experience--header">
+				<span class="home-page--section--experience--dates"
+					>01/2021 - 10/2021</span
+				>
+				<span class="home-page--section--experience--place"
+					>Alphta Digital Lab</span
+				>
+			</div>
+			<div class="home-page--section--experience--position">
+				Angular Developer
+			</div>
+			<div class="home-page--section--experience--desc">
+				Implementation of complex, animated RWD views using Angular framework in
+				SSR methodology. Communicating with backend via JSON:API, managing
+				application state with Akita Store. Application testing with Cypress.
+				Abstraction of reusable components into libraries.
+			</div>
+		</div>
+		<!-- ISPLMR -->
+		<div class="home-page--section--experience">
+			<div class="home-page--section--experience--header">
+				<span class="home-page--section--experience--dates"
+					>03/2020 - 02/2021</span
+				>
+				<span class="home-page--section--experience--place">ISPLMR</span>
+			</div>
+			<div class="home-page--section--experience--position">
+				Angular & Node Developer
+			</div>
+			<div class="home-page--section--experience--desc">
+				Implementing web applications in MEAN stack for medical center for
+				online and offline patient services. Management and creation of medical
+				records, reservations, schedules, payments. Three separate applications
+				for patients, doctors, and management. Integration with external systems
+				via REST API and SOAP. Backend based on microservices written in Node
+				using TypeScript. Frontend in Angular with abstraction of frequently
+				used elements to libraries.
+			</div>
+		</div>
+	</div>
 </div>
